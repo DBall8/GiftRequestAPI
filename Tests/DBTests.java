@@ -22,7 +22,7 @@ public class DBTests {
 
         String employee = "Fred";
         Gift g = new Gift("Snake", (float)19.99, false);
-        GiftRequest gr = new GiftRequest("gr1", g, employee);
+        GiftRequest gr = new GiftRequest("gr1", g, employee, "node1");
 
         Database.getInstance().insertEmployee(employee);
         Database.getInstance().insertGift(g);

@@ -92,6 +92,8 @@ public class Database {
             s.execute("CREATE TABLE giftrequests (grID VARCHAR(50) PRIMARY KEY," +
                     " giftName VARCHAR(200)," +
                     " assignee VARCHAR(100)," +
+                    " nodeID VARCHAR(255)," +
+                    " status VARCHAR(50)," +
                     " date DATE," +
                     " time TIME," +
                     "constraint fk_giftName foreign key(giftName) references gifts(name)," +
@@ -183,12 +185,14 @@ public class Database {
 
     public static boolean insertGR(GiftRequest gr){
         try{
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO giftrequests VALUES(?, ?, ?, ?, ?)");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO giftrequests VALUES(?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, gr.getGrID());
             ps.setString(2, gr.getGift().getName());
             ps.setString(3, gr.getAssignee());
-            ps.setDate(4, gr.getDate());
-            ps.setTime(5, gr.getTime());
+            ps.setString(4, gr.getNodeID());
+            ps.setString(5, gr.getStatus());
+            ps.setDate(6, gr.getDate());
+            ps.setTime(7, gr.getTime());
             ps.execute();
             ps.close();
         } catch(SQLIntegrityConstraintViolationException e){
@@ -261,7 +265,7 @@ public class Database {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM giftrequests");
             ResultSet rs = ps.executeQuery();
 
-            String grID, giftName, assignee;
+            String grID, giftName, assignee, nodeID, status;
             Date date;
             Time time;
 
@@ -269,10 +273,12 @@ public class Database {
                 grID = rs.getString("grID");
                 giftName = rs.getString("giftName");
                 assignee = rs.getString("assignee");
+                nodeID = rs.getString("nodeID");
+                status = rs.getString("status");
                 date = rs.getDate("date");
                 time = rs.getTime("time");
 
-                GiftRequest gr = new GiftRequest(grID, giftDirectory.getGift(giftName), assignee, date, time);
+                GiftRequest gr = new GiftRequest(grID, giftDirectory.getGift(giftName), assignee, nodeID, status, date, time);
                 grs.put(grID, gr);
             }
 

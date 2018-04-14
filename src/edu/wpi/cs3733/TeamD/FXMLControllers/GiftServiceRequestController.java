@@ -4,7 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class GiftServiceRequestController {
+public class GiftServiceRequestController extends ScreenController{
 
     @FXML
     JFXButton requestGiftButton;
