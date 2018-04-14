@@ -1,3 +1,5 @@
+package edu.wpi.cs3733.TeamD;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

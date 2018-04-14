@@ -1,3 +1,5 @@
+package edu.wpi.cs3733.TeamD.FXMLControllers;
+
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
