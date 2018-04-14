@@ -19,8 +19,14 @@ public class GiftRequest {
         try{
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GiftRequestScreen.fxml"));
+
+            Scene scene = new Scene(root, windowWidth, windowLength);
+            scene.getStylesheets().add(cssPath);
+
             stage.setTitle("Gift Request");
-            stage.setScene(new Scene(root, windowWidth, windowLength));
+            stage.setX(xcoord);
+            stage.setY(ycoord);
+            stage.setScene(scene);
             stage.show();
         }
         catch(IOException e){

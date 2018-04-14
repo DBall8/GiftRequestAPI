@@ -17,9 +17,6 @@ public class GR {
         this.assignee = assignee;
         this.date = new Date(Calendar.getInstance().getTime().getTime());
         this.time = new Time(Calendar.getInstance().getTime().getTime());
-
-        System.out.println(date);
-        System.out.println(time);
     }
 
     public String getGrID() {
