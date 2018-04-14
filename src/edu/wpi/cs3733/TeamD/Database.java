@@ -2,8 +2,12 @@ package edu.wpi.cs3733.TeamD;
 
 import edu.wpi.cs3733.TeamD.Entities.GR;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
+import edu.wpi.cs3733.TeamD.Managers.GiftDirectory;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Database {
 
@@ -187,6 +191,90 @@ public class Database {
             System.out.println("Could not insert gift request " + gr.getGrID());
             e.printStackTrace();
         }
+    }
+
+    public static HashMap<String, Gift> loadGiftDirectory(){
+        HashMap<String, Gift> gifts = new HashMap<>();
+
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM gifts");
+            ResultSet rs = ps.executeQuery();
+
+            String name;
+            Float cost;
+            boolean isFood;
+
+            while(rs.next()){
+                name = rs.getString("name");
+                cost = rs.getFloat("cost");
+                isFood = rs.getString("isFood").equals("t");
+
+                Gift g = new Gift(name, cost, isFood);
+                gifts.put(name, g);
+            }
+
+            ps.close();
+            rs.close();
+        } catch(SQLException e){
+            System.out.println("Failed to load gift directory");
+            e.printStackTrace();
+        }
+
+        return gifts;
+    }
+
+    public static List<String> loadEmployees(){
+        List<String> employees = new ArrayList<String>();
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM employees");
+            ResultSet rs = ps.executeQuery();
+
+            String name;
+
+            while(rs.next()){
+                name = rs.getString("name");
+                employees.add(name);
+            }
+
+            ps.close();
+            rs.close();
+        } catch(SQLException e){
+            System.out.println("Failed to load employees list");
+            e.printStackTrace();
+        }
+
+        return employees;
+    }
+
+    public static HashMap<String, GR> loadGRs(GiftDirectory giftDirectory){
+        HashMap<String, GR> grs = new HashMap<>();
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM giftrequests");
+            ResultSet rs = ps.executeQuery();
+
+            String grID, giftName, assignee;
+            Date date;
+            Time time;
+
+            while(rs.next()){
+                grID = rs.getString("grID");
+                giftName = rs.getString("giftName");
+                assignee = rs.getString("assignee");
+                date = rs.getDate("date");
+                time = rs.getTime("time");
+
+                GR gr = new GR(grID, giftDirectory.getGift(giftName), assignee, date, time);
+                grs.put(grID, gr);
+            }
+
+            ps.close();
+            rs.close();
+        } catch(SQLException e){
+            System.out.println("Failed to load gift requests");
+            e.printStackTrace();
+        }
+
+        return grs;
     }
 
 }

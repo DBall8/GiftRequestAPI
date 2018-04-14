@@ -11,12 +11,22 @@ public class GR {
     Date date;
     Time time;
 
+    // For creating brand new Gift Requests, because this generates a new timestamp
     public GR(String grID, Gift gift, String assignee) {
         this.grID = grID;
         this.gift = gift;
         this.assignee = assignee;
         this.date = new Date(Calendar.getInstance().getTime().getTime());
         this.time = new Time(Calendar.getInstance().getTime().getTime());
+    }
+
+    // For loading existing Gift Requests because this loads an existing timestamp
+    public GR(String grID, Gift gift, String assignee, Date date, Time time) {
+        this.grID = grID;
+        this.gift = gift;
+        this.assignee = assignee;
+        this.date = date;
+        this.time = time;
     }
 
     public String getGrID() {

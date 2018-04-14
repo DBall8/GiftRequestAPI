@@ -1,10 +1,14 @@
 import edu.wpi.cs3733.TeamD.Database;
-import edu.wpi.cs3733.TeamD.Entities.Employee;
 import edu.wpi.cs3733.TeamD.Entities.GR;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
+import edu.wpi.cs3733.TeamD.Managers.EmployeeList;
+import edu.wpi.cs3733.TeamD.Managers.GiftDirectory;
+import edu.wpi.cs3733.TeamD.Managers.GiftRequestManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import static junit.framework.TestCase.assertEquals;
 
 public class DBTests {
 
@@ -23,6 +27,15 @@ public class DBTests {
         Database.getInstance().insertEmployee(employee);
         Database.getInstance().insertGift(g);
         Database.getInstance().insertGR(gr);
+
+        GiftRequestManager grm = new GiftRequestManager();
+        GiftDirectory gd = grm.getGiftDirectory();
+        EmployeeList el = grm.getEmployeeList();
+
+        assertEquals("Snake", gd.getGift("Snake").getName());
+        assertEquals((float)19.99, gd.getGift("Snake").getCost());
+
+        assertEquals("Fred", el.getEmployee(0));
 
     }
 
