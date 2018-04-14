@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
 
-public class GR {
+public class GiftRequest {
     String grID;
     Gift gift;
     String assignee;
@@ -12,7 +12,7 @@ public class GR {
     Time time;
 
     // For creating brand new Gift Requests, because this generates a new timestamp
-    public GR(String grID, Gift gift, String assignee) {
+    public GiftRequest(String grID, Gift gift, String assignee) {
         this.grID = grID;
         this.gift = gift;
         this.assignee = assignee;
@@ -21,7 +21,7 @@ public class GR {
     }
 
     // For loading existing Gift Requests because this loads an existing timestamp
-    public GR(String grID, Gift gift, String assignee, Date date, Time time) {
+    public GiftRequest(String grID, Gift gift, String assignee, Date date, Time time) {
         this.grID = grID;
         this.gift = gift;
         this.assignee = assignee;

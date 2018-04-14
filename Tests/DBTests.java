@@ -1,5 +1,5 @@
 import edu.wpi.cs3733.TeamD.Database;
-import edu.wpi.cs3733.TeamD.Entities.GR;
+import edu.wpi.cs3733.TeamD.Entities.GiftRequest;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
 import edu.wpi.cs3733.TeamD.Managers.EmployeeList;
 import edu.wpi.cs3733.TeamD.Managers.GiftDirectory;
@@ -22,7 +22,7 @@ public class DBTests {
 
         String employee = "Fred";
         Gift g = new Gift("Snake", (float)19.99, false);
-        GR gr = new GR("gr1", g, employee);
+        GiftRequest gr = new GiftRequest("gr1", g, employee);
 
         Database.getInstance().insertEmployee(employee);
         Database.getInstance().insertGift(g);
@@ -36,6 +36,23 @@ public class DBTests {
         assertEquals((float)19.99, gd.getGift("Snake").getCost());
 
         assertEquals("Fred", el.getEmployee(0));
+
+        gd.addGift("Toy plane", (float)5.00, true);
+        el.addEmployee("Nate");
+
+        Database.getInstance().close();
+        Database.getInstance().initDatabase();
+
+        grm = new GiftRequestManager();
+        gd = grm.getGiftDirectory();
+        el = grm.getEmployeeList();
+
+        assertEquals("Toy plane", gd.getGift("Toy plane").getName());
+        assertEquals((float)5.00, gd.getGift("Toy plane").getCost());
+
+        assertEquals(true, el.containsEmployee("Nate"));
+
+
 
     }
 

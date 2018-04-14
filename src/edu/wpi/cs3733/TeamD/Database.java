@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.TeamD;
 
-import edu.wpi.cs3733.TeamD.Entities.GR;
+import edu.wpi.cs3733.TeamD.Entities.GiftRequest;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
 import edu.wpi.cs3733.TeamD.Managers.GiftDirectory;
 
@@ -73,7 +73,7 @@ public class Database {
             s.close();
         } catch(SQLException e){
             System.out.println("Could not create gifts table.");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         // Employee table
@@ -83,7 +83,7 @@ public class Database {
             s.close();
         } catch(SQLException e){
             System.out.println("Could not create employees table.");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         // Gift Request table
@@ -99,12 +99,12 @@ public class Database {
             s.close();
         } catch(SQLException e){
             System.out.println("Could not create gift requests table.");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
     public static void dropTables(){
-        // GR table
+        // GiftRequest table
         try{
             Statement s = connection.createStatement();
             s.execute("DROP TABLE giftrequests");
@@ -145,7 +145,7 @@ public class Database {
 
     }
 
-    public static void insertEmployee(String employee){
+    public static boolean insertEmployee(String employee){
         try{
             PreparedStatement ps = connection.prepareStatement("INSERT INTO employees VALUES(?)");
             ps.setString(1, employee);
@@ -153,13 +153,16 @@ public class Database {
             ps.close();
         } catch(SQLIntegrityConstraintViolationException e){
             System.out.println("Could not insert employee " + employee + " because the employee already exists.");
+            return false;
         } catch(SQLException e){
             System.out.println("Could not insert employee " + employee);
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
-    public static void insertGift(Gift g){
+    public static boolean insertGift(Gift g){
         try{
             PreparedStatement ps = connection.prepareStatement("INSERT INTO gifts VALUES(?, ?, ?)");
             ps.setString(1, g.getName());
@@ -169,13 +172,16 @@ public class Database {
             ps.close();
         } catch(SQLIntegrityConstraintViolationException e){
             System.out.println("Could not insert gift " + g.getName() + " because the gift already exists.");
+            return false;
         } catch(SQLException e){
             System.out.println("Could not insert gift " + g.getName());
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
-    public static void insertGR(GR gr){
+    public static boolean insertGR(GiftRequest gr){
         try{
             PreparedStatement ps = connection.prepareStatement("INSERT INTO giftrequests VALUES(?, ?, ?, ?, ?)");
             ps.setString(1, gr.getGrID());
@@ -187,10 +193,13 @@ public class Database {
             ps.close();
         } catch(SQLIntegrityConstraintViolationException e){
             System.out.println("Could not insert gift request " + gr.getGrID() + " because the gift request already exists.");
+            return false;
         } catch(SQLException e){
             System.out.println("Could not insert gift request " + gr.getGrID());
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     public static HashMap<String, Gift> loadGiftDirectory(){
@@ -246,8 +255,8 @@ public class Database {
         return employees;
     }
 
-    public static HashMap<String, GR> loadGRs(GiftDirectory giftDirectory){
-        HashMap<String, GR> grs = new HashMap<>();
+    public static HashMap<String, GiftRequest> loadGRs(GiftDirectory giftDirectory){
+        HashMap<String, GiftRequest> grs = new HashMap<>();
         try{
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM giftrequests");
             ResultSet rs = ps.executeQuery();
@@ -263,7 +272,7 @@ public class Database {
                 date = rs.getDate("date");
                 time = rs.getTime("time");
 
-                GR gr = new GR(grID, giftDirectory.getGift(giftName), assignee, date, time);
+                GiftRequest gr = new GiftRequest(grID, giftDirectory.getGift(giftName), assignee, date, time);
                 grs.put(grID, gr);
             }
 

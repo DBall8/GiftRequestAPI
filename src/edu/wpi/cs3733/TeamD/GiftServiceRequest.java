@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class GiftRequest {
+public class GiftServiceRequest {
 
 
-    public GiftRequest(){
+    public GiftServiceRequest(){
         Database.getInstance().initDatabase();
     }
 
