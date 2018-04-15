@@ -25,11 +25,16 @@ public class GiftServiceRequest {
     public void run(int xcoord, int ycoord, int windowWidth, int windowLength, String cssPath, String destNodeID, String originNodeID) throws ServiceException{
 
         GRM.getGiftDirectory().addGift("Snake", (float)19.99, false);
+        GRM.getGiftDirectory().addGift("Plane", (float)10.00, false);
+        GRM.getGiftDirectory().addGift("Chocolates", (float)1.00, true);
+        GRM.getEmployeeList().addEmployee("Trevor");
+        GRM.getEmployeeList().addEmployee("Damon");
+        GRM.getEmployeeList().addEmployee("Jess");
 
 
         try{
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GiftSelectorScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GiftRequestScreen.fxml"));
 
             Scene scene = new Scene(root, windowWidth, windowLength);
             if(cssPath != null){

@@ -3,11 +3,10 @@ package edu.wpi.cs3733.TeamD.FXMLControllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
-import edu.wpi.cs3733.TeamD.Entities.GiftRequest;
 import edu.wpi.cs3733.TeamD.GiftServiceRequest;
 import edu.wpi.cs3733.TeamD.Managers.GiftRequestManager;
-import javafx.beans.property.FloatProperty;
-import javafx.beans.property.SimpleFloatProperty;
+import edu.wpi.cs3733.TeamD.TreeTableClasses.GiftRow;
+import edu.wpi.cs3733.TeamD.TreeTableClasses.GiftTable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -23,7 +22,6 @@ import javafx.util.Callback;
 
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -43,49 +41,8 @@ public class GiftSelectionScreenController extends ScreenController implements I
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        JFXTreeTableColumn<GiftRow, String> nameCol = new JFXTreeTableColumn<>("Gift");
-        nameCol.setPrefWidth(300);
-        nameCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<GiftRow, String>, ObservableValue<String>>() {
-
-            /** call
-             *  Used to populate the columns in the TreeTableView.  Would be the same for all of the following as well.
-             * @param param: Sets up a Column with a field
-             * @return the TreeTableView
-             */
-            @Override
-            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<GiftRow, String> param) {
-                return param.getValue().getValue().name;
-            }
-        });
-
-        JFXTreeTableColumn<GiftRow, String> costCol = new JFXTreeTableColumn<>("Cost");
-        costCol.setPrefWidth(300);
-        costCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<GiftRow, String>, ObservableValue<String>>() {
-
-            /** call
-             *  Used to populate the columns in the TreeTableView.  Would be the same for all of the following as well.
-             * @param param: Sets up a Column with a field
-             * @return the TreeTableView
-             */
-            @Override
-            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<GiftRow, String> param) {
-                return param.getValue().getValue().cost;
-            }
-        });
-
-        ObservableList<GiftRow> gifts = FXCollections.observableArrayList();
-
-        GiftRequestManager GRM = GiftServiceRequest.getGRM();
-
-        for(Gift g: GRM.getGiftDirectory().getGifts()){
-            gifts.add(new GiftRow(g.getName(), g.getCost()));
-        }
-
-        //Sets the columns in the TreeTableView
-        final TreeItem<GiftRow> root = new RecursiveTreeItem<>(gifts, RecursiveTreeObject::getChildren);
-        giftTreeTable.getColumns().setAll(nameCol, costCol);
-        giftTreeTable.setRoot(root);
-        giftTreeTable.setShowRoot(false);
+        GiftTable giftTable = new GiftTable(giftTreeTable);
+        giftTable.load(GiftServiceRequest.getGRM().getGiftDirectory().getGifts());
 
         //Used to filter searches in the TreeTableView.
         filterTextField.textProperty().addListener(new ChangeListener<String>() {
@@ -121,24 +78,6 @@ public class GiftSelectionScreenController extends ScreenController implements I
 
     @FXML
     private void buttonAction(ActionEvent e){
-
-    }
-
-    public class GiftRow extends RecursiveTreeObject<GiftRow> {
-        StringProperty name;
-        StringProperty cost;
-
-        public GiftRow(String name, float cost){
-            this.name = new SimpleStringProperty(name);
-            this.cost = new SimpleStringProperty(costFtoS(cost));
-        }
-
-        private String costFtoS(float cost){
-            DecimalFormat df = new DecimalFormat();
-            df.setMaximumFractionDigits(2);
-            String str = "$" + df.format(cost);
-            return str;
-        }
 
     }
 }

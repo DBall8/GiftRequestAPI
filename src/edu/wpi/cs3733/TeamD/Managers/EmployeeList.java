@@ -23,6 +23,10 @@ public class EmployeeList {
         }
     }
 
+    public List<String> getEmployees(){
+        return employees;
+    }
+
     public boolean containsEmployee(String name){
         return employees.contains(name);
     }
