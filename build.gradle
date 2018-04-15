@@ -40,13 +40,13 @@ dependencies {
 jar {
 
 	manifest {
-		attributes 'Main-Class': 'edu.wpi.cs3733d18.teamD.Launcher.Launcher'
+		attributes 'Main-Class': 'GiftRequestAPI.Launcher'
 	}
 	from configurations.runtime.collect { zipTree(it) }
 }
 
 task run(type: JavaExec) {
-	main = 'edu.wpi.cs3733d18.teamD.Launcher.Launcher'
+	main = 'GiftRequestAPI.Launcher'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
