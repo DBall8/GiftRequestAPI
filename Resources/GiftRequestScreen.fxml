@@ -46,12 +46,12 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <JFXButton layoutX="285.0" layoutY="746.0" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" text="Order Gift">
+      <JFXButton fx:id="orderGiftButton" layoutX="285.0" layoutY="746.0" onAction="#buttonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" text="Order Gift">
          <font>
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="464.0" layoutY="746.0" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" text="Admin Options">
+      <JFXButton fx:id="adminOptionsButton" layoutX="464.0" layoutY="746.0" onAction="#buttonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" text="Admin Options">
          <font>
             <Font size="18.0" />
          </font>

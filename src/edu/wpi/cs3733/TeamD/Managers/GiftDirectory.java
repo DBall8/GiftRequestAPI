@@ -3,7 +3,10 @@ package edu.wpi.cs3733.TeamD.Managers;
 import edu.wpi.cs3733.TeamD.Database;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class GiftDirectory {
 
@@ -15,6 +18,18 @@ public class GiftDirectory {
 
     public Gift getGift(String name){
         return gifts.get(name);
+    }
+
+    public ArrayList<Gift> getGifts(){
+
+        ArrayList<Gift> giftList = new ArrayList<>();
+        Iterator it = gifts.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry pair = (Map.Entry)it.next();
+            giftList.add((Gift)pair.getValue());
+        }
+
+        return giftList;
     }
 
     public void addGift(String name, float cost, boolean isFood){
