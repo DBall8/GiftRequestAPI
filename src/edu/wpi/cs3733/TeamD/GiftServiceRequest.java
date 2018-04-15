@@ -18,15 +18,18 @@ public class GiftServiceRequest {
         GRM = new GiftRequestManager();
     }
 
-    protected static GiftRequestManager getGRM(){
+    public static GiftRequestManager getGRM(){
         return GRM;
     }
 
     public void run(int xcoord, int ycoord, int windowWidth, int windowLength, String cssPath, String destNodeID, String originNodeID) throws ServiceException{
 
+        GRM.getGiftDirectory().addGift("Snake", (float)19.99, false);
+
+
         try{
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GiftRequestScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GiftSelectorScreen.fxml"));
 
             Scene scene = new Scene(root, windowWidth, windowLength);
             if(cssPath != null){
