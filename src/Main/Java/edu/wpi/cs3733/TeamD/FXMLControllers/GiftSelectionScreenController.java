@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
 import java.util.List;
@@ -73,7 +74,7 @@ public class GiftSelectionScreenController extends ScreenController implements I
 
         List<String> locations = GiftServiceRequest.getLocations();
         if(locations.size() > 0){
-            //TextFields.bindAutoCompletion(locationTextField, locations);
+            TextFields.bindAutoCompletion(locationTextField, locations);
         }
     }
 

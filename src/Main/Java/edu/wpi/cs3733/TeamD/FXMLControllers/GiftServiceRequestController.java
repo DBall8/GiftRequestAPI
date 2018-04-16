@@ -35,6 +35,11 @@ public class GiftServiceRequestController extends ScreenController implements In
     private ChoiceBox<String> assignChoiceBox;
 
     @FXML
+    private JFXButton deleteUnassingedButton;
+    @FXML
+    private JFXButton deletePendingButton;
+
+    @FXML
     private JFXTreeTableView<GRRow> unassignedTreeTable;
     @FXML
     private JFXTreeTableView<GRRow> pendingTreeTable;
@@ -88,6 +93,26 @@ public class GiftServiceRequestController extends ScreenController implements In
             TreeItem<GRRow> selectedItem = pendingTreeTable.getSelectionModel().getSelectedItem();
             String grID = selectedItem.getValue().getGR().getGrID();
             GiftServiceRequest.getGRM().resolveGR(grID);
+        }
+        else if(e.getSource() == deleteUnassingedButton){
+            if(unassignedTreeTable.getSelectionModel().isEmpty()){
+                System.out.println("Please select a delivery to delete");
+                return;
+            }
+
+            TreeItem<GRRow> selectedItem = unassignedTreeTable.getSelectionModel().getSelectedItem();
+            String grID = selectedItem.getValue().getGR().getGrID();
+            GiftServiceRequest.getGRM().deleteGR(grID);
+        }
+        else if(e.getSource() == deletePendingButton){
+            if(pendingTreeTable.getSelectionModel().isEmpty()){
+                System.out.println("Please select a delivery to delete");
+                return;
+            }
+
+            TreeItem<GRRow> selectedItem = pendingTreeTable.getSelectionModel().getSelectedItem();
+            String grID = selectedItem.getValue().getGR().getGrID();
+            GiftServiceRequest.getGRM().deleteGR(grID);
         }
     }
 

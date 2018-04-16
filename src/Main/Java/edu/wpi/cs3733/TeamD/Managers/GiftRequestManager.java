@@ -49,6 +49,13 @@ public class GiftRequestManager extends ObservableSubject {
         notifyObservers();
     }
 
+    public void deleteGR(String grID){
+        if(Database.getInstance().removeGR(grID)){
+            giftRequests.remove(grID);
+            notifyObservers();
+        }
+    }
+
     public List<GiftRequest> getAllGiftRequests(){
         ArrayList<GiftRequest> grList = new ArrayList<>();
         Iterator it = giftRequests.entrySet().iterator();

@@ -238,6 +238,20 @@ public class Database {
         return false;
     }
 
+    public static boolean removeGR(String grID){
+        try{
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM giftrequests WHERE grID=?");
+            ps.setString(1, grID);
+            ps.execute();
+            ps.close();
+            return true;
+        } catch (SQLException e){
+            System.out.println("Could not remove gift request " + grID);
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     public static HashMap<String, Gift> loadGiftDirectory(){
         HashMap<String, Gift> gifts = new HashMap<>();

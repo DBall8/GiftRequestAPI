@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.TeamD.FXMLControllers.GiftServiceRequestController">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -55,8 +54,8 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="624.0" minHeight="10.0" prefHeight="624.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="278.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="624.0" minHeight="10.0" prefHeight="595.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="278.0" minHeight="0.0" prefHeight="61.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label text="Unassigned Deliveries:">
@@ -81,7 +80,7 @@
                   </JFXTreeTableView>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
                      <children>
-                        <Label text="Assign To:">
+                        <Label prefHeight="27.0" prefWidth="98.0" text="Assign To:">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -102,6 +101,14 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </HBox.margin>
                         </JFXButton>
+                        <JFXButton fx:id="deleteUnassingedButton" onAction="#buttonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" text="Delete Order">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </HBox.margin>
+                        </JFXButton>
                      </children>
                      <GridPane.margin>
                         <Insets />
@@ -113,6 +120,17 @@
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="deletePendingButton" onAction="#buttonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" text="Delete Order">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </HBox.margin>
                         </JFXButton>
                      </children>
                   </HBox>
