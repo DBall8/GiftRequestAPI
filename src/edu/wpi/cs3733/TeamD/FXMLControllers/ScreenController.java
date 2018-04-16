@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.TeamD.FXMLControllers;
 
+import edu.wpi.cs3733.TeamD.GiftServiceRequest;
 import edu.wpi.cs3733.TeamD.Managers.GiftRequestManager;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,16 +15,20 @@ import java.io.IOException;
 
 public abstract class ScreenController {
 
-    protected void switchScreen(Stage stage, String fxmlFile){
+    protected FXMLLoader switchScreen(Stage stage, String fxmlFile){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlFile));
 
         try{
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, GiftServiceRequest.getWindowWidth(), GiftServiceRequest.getWindowLength());
             stage.setScene(scene);
+            //stage.setWidth(GiftServiceRequest.getWindowWidth());
+            //stage.setHeight(GiftServiceRequest.getWindowLength());
         } catch(IOException e){
             e.printStackTrace();
         }
+
+        return fxmlLoader;
     }
 
     protected void popupScreen(String fxml, Window ownerWindow, String title) throws IOException{

@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.stage.Stage;
@@ -34,9 +35,22 @@ public class AdminScreenController extends ScreenController implements Initializ
     @FXML
     private JFXTreeTableView<GiftRow> giftTreeTable;
 
+    @FXML
+    private JFXButton addGiftButton;
+    @FXML
+    private JFXButton deleteGiftButton;
+    @FXML
+    private TextField giftNameField;
+    @FXML
+    private TextField giftCostField;
+
+    GiftTable giftTable;
+    ObservableList<EmployeeRow> employees;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        GiftTable giftTable = new GiftTable(giftTreeTable);
+        giftTable = new GiftTable(giftTreeTable);
         giftTable.load(GiftServiceRequest.getGRM().getGiftDirectory().getGifts());
 
         JFXTreeTableColumn<EmployeeRow, String> nameCol = new JFXTreeTableColumn<>("Employee");
@@ -56,7 +70,7 @@ public class AdminScreenController extends ScreenController implements Initializ
             }
         });
 
-        ObservableList<EmployeeRow> employees = FXCollections.observableArrayList();
+        employees = FXCollections.observableArrayList();
 
         GiftRequestManager GRM = GiftServiceRequest.getGRM();
 
@@ -76,7 +90,47 @@ public class AdminScreenController extends ScreenController implements Initializ
         if(e.getSource() == backButton){
             switchScreen((Stage)backButton.getScene().getWindow(), "GiftRequestScreen.fxml");
         }
+        else if(e.getSource() == addGiftButton){
+            String giftName = giftNameField.getText();
+            String giftCost = giftCostField.getText();
+
+            if(giftName.equals("") || giftCost.equals("")){
+                System.out.println("Please provide a name and a cost for the gift.");
+                return;
+            }
+
+            float cost;
+            if((cost = moneyStringToFloat(giftCost)) < 0){
+                System.out.println("Invalid money amount.");
+                return;
+            }
+
+            GiftRequestManager GRM = GiftServiceRequest.getGRM();
+            Gift g = GRM.getGiftDirectory().addGift(giftName, cost, false);
+
+            if(g != null) {
+                giftTable.addRow(g);
+            }
+
+            giftNameField.setText("");
+            giftCostField.setText("");
+
+        }
+        else if(e.getSource() == deleteGiftButton){
+
+        }
     }
 
+    private float moneyStringToFloat(String money){
+        money = money.replace("$", "");
+        try{
+            float cost = Float.parseFloat(money);
+            return cost;
+        }
+        catch(NumberFormatException e){
+            System.out.println("Not a valid dollar value");
+            return -1;
+        }
+    }
 
 }

@@ -16,8 +16,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -36,10 +38,14 @@ public class GiftSelectionScreenController extends ScreenController implements I
     @FXML
     private JFXButton orderGiftButton;
     @FXML
-    private JFXTextField locationText;
+    private JFXTextField locationTextField;
+    @FXML
+    private Label errorLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        errorLabel.setVisible(false);
 
         GiftTable giftTable = new GiftTable(giftTreeTable);
         giftTable.load(GiftServiceRequest.getGRM().getGiftDirectory().getGifts());
@@ -78,6 +84,23 @@ public class GiftSelectionScreenController extends ScreenController implements I
 
     @FXML
     private void buttonAction(ActionEvent e){
+        if(e.getSource() == orderGiftButton){
 
+            String location = locationTextField.getText();
+            if(location.equals("")){
+                System.out.println("please select a delivery location");
+                errorLabel.setVisible(true);
+                return;
+            }
+
+            TreeItem<GiftRow> selectedItem = giftTreeTable.getSelectionModel().getSelectedItem();
+            Gift g = selectedItem.getValue().getGift();
+
+            GiftRequestManager GRM = GiftServiceRequest.getGRM();
+
+            GRM.addGiftRequest(g, location);
+
+            ((Stage)locationTextField.getScene().getWindow()).close();
+        }
     }
 }

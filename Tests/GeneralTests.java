@@ -7,6 +7,6 @@ public class GeneralTests {
     @Test
     public void creatingEntities(){
         Gift g = new Gift("Plane", (float)12.99, false);
-        GiftRequest gr = new GiftRequest("gr1", g, "Tim", "node1");
+        GiftRequest gr = new GiftRequest(g, "node1");
     }
 }

@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -11,32 +12,48 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="697.0" prefWidth="1110.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.TeamD.FXMLControllers.AdminScreenController">
    <center>
-      <JFXTabPane BorderPane.alignment="CENTER">
+      <JFXTabPane stylesheets="@default.css" tabMinHeight="80.0" BorderPane.alignment="CENTER">
          <tabs>
-            <Tab closable="false" text="Delivery Personnel">
+            <Tab closable="false" style="-fx-padding: 10;" text="Delivery Personnel">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <VBox prefHeight="662.0" prefWidth="1110.0" spacing="10.0" styleClass="label" stylesheets="@default.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label text="Personnel">
+                              <Label stylesheets="@css/default.css" text="Personnel">
                                  <VBox.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </VBox.margin>
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
                               </Label>
-                              <JFXTreeTableView fx:id="personnelTreeTable" prefHeight="568.0" prefWidth="1110.0" />
-                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                              <JFXTreeTableView fx:id="personnelTreeTable" prefHeight="568.0" prefWidth="1110.0" VBox.vgrow="ALWAYS" />
+                              <HBox spacing="20.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <JFXButton text="Add Personnel" />
-                                    <JFXTextField />
-                                    <JFXButton styleClass="jfx-button" stylesheets="@default.css" text="Delete" />
+                                    <JFXButton stylesheets="@css/bigButtons.css" text="Add Personnel">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font></JFXButton>
+                                    <JFXTextField promptText="Name">
+                                       <HBox.margin>
+                                          <Insets bottom="20.0" right="120.0" top="20.0" />
+                                       </HBox.margin></JFXTextField>
+                                    <JFXButton alignment="CENTER_RIGHT" styleClass="jfx-button" text="Delete">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                       <stylesheets>
+                                          <URL value="@default.css" />
+                                          <URL value="@css/bigButtons.css" />
+                                       </stylesheets></JFXButton>
                                  </children>
                                  <padding>
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -48,11 +65,11 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="giftsTreeTable" closable="false" text="Available Gifts">
+            <Tab fx:id="giftsTreeTable" closable="false" style="-fx-padding: 10;" text="Available Gifts">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox prefHeight="662.0" prefWidth="1110.0" spacing="10.0" styleClass="label" stylesheets="@default.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox prefHeight="662.0" prefWidth="1110.0" styleClass="label" stylesheets="@default.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Label text="Gifts">
                                  <VBox.margin>
@@ -61,14 +78,36 @@
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
                               </Label>
-                              <JFXTreeTableView fx:id="giftTreeTable" prefHeight="568.0" prefWidth="1110.0" />
+                              <JFXTreeTableView fx:id="giftTreeTable" prefHeight="431.0" prefWidth="1070.0" VBox.vgrow="ALWAYS" />
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                                  <children>
-                                    <JFXButton text="Add Gift" />
-                                    <JFXTextField promptText="Name" />
-                                    <JFXTextField promptText="Cost" />
-                                    <JFXButton styleClass="jfx-button" stylesheets="@default.css" text="Delete" />
+                                    <JFXButton fx:id="addGiftButton" onAction="#buttonAction" stylesheets="@css/bigButtons.css" text="Add Gift">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font></JFXButton>
+                                    <JFXTextField fx:id="giftNameField" promptText="Name">
+                                       <HBox.margin>
+                                          <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
+                                       </HBox.margin></JFXTextField>
+                                    <JFXTextField fx:id="giftCostField" promptText="Cost">
+                                       <HBox.margin>
+                                          <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
+                                       </HBox.margin></JFXTextField>
+                                    <JFXButton fx:id="deleteGiftButton" onAction="#buttonAction" styleClass="jfx-button" text="Delete">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="80.0" />
+                                       </HBox.margin>
+                                       <stylesheets>
+                                          <URL value="@default.css" />
+                                          <URL value="@css/bigButtons.css" />
+                                       </stylesheets></JFXButton>
                                  </children>
                                  <padding>
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -80,7 +119,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab closable="false" text="Reports">
+            <Tab closable="false" style="-fx-padding: 10;" text="Reports">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -90,13 +129,22 @@
               </content>
             </Tab>
          </tabs>
-      </JFXTabPane>
-   </center>
-   <top>
-      <JFXButton fx:id="backButton" onAction="#buttonAction" prefHeight="61.0" prefWidth="135.0" text="Back" BorderPane.alignment="CENTER_LEFT">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
+      </JFXTabPane>
+   </center>
+   <top>
+      <JFXButton fx:id="backButton" onAction="#buttonAction" prefHeight="61.0" prefWidth="135.0" stylesheets="@css/bigButtons.css" text="Back" BorderPane.alignment="CENTER_LEFT">
+         <font>
+            <Font size="35.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
       </JFXButton>
    </top>
 </BorderPane>

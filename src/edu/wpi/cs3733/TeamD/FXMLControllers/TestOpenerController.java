@@ -14,7 +14,7 @@ public class TestOpenerController {
     public void buttonAction(ActionEvent e){
         GiftServiceRequest gr = new GiftServiceRequest();
         try{
-            gr.run(0,0,1900,1000,"default.css",null,null);
+            gr.run(0,0,1900,1000,"css/default.css",null,null);
         }
         catch(ServiceException se){
             System.out.println("Could not work");

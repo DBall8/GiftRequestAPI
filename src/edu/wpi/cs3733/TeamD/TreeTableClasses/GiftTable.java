@@ -24,6 +24,8 @@ public class GiftTable{
     JFXTreeTableColumn<GiftRow, String> nameCol;
     JFXTreeTableColumn<GiftRow, String> costCol;
 
+    ObservableList<GiftRow> gifts;
+
     public GiftTable(JFXTreeTableView<GiftRow> treeTable) {
 
         this.treeTable = treeTable;
@@ -64,7 +66,7 @@ public class GiftTable{
     }
 
     public void load(ArrayList<Gift> giftList){
-        ObservableList<GiftRow> gifts = FXCollections.observableArrayList();
+        gifts = FXCollections.observableArrayList();
 
         GiftRequestManager GRM = GiftServiceRequest.getGRM();
 
@@ -77,6 +79,11 @@ public class GiftTable{
         treeTable.getColumns().setAll(nameCol, costCol);
         treeTable.setRoot(root);
         treeTable.setShowRoot(false);
+    }
+
+    public void addRow(Gift g){
+        gifts.add(new GiftRow(g));
+        treeTable.refresh();
     }
 
 }

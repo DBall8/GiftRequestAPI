@@ -96,7 +96,7 @@ public class Database {
                     " status VARCHAR(50)," +
                     " date DATE," +
                     " time TIME," +
-                    "constraint fk_giftName foreign key(giftName) references gifts(name)," +
+                    "constraint fk_giftName foreign key(giftName) references gifts(name))--," +
                     "constraint fk_assignee foreign key(assignee) references employees(name))");
             s.close();
         } catch(SQLException e){

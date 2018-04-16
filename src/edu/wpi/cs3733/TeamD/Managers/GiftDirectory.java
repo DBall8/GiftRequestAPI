@@ -32,11 +32,14 @@ public class GiftDirectory {
         return giftList;
     }
 
-    public void addGift(String name, float cost, boolean isFood){
+    public Gift addGift(String name, float cost, boolean isFood){
         Gift g = new Gift(name, cost, isFood);
         if(Database.getInstance().insertGift(g)){
             gifts.put(name, g);
+            return g;
         }
+
+        return g;
     }
 
 }

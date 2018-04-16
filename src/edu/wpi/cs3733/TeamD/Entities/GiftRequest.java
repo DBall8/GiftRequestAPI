@@ -14,10 +14,10 @@ public class GiftRequest {
     Time time;
 
     // For creating brand new Gift Requests, because this generates a new timestamp
-    public GiftRequest(String grID, Gift gift, String assignee, String nodeID) {
-        this.grID = grID;
+    public GiftRequest(Gift gift, String nodeID) {
+        this.grID = "GR-" + System.currentTimeMillis();
+        this.assignee = "";
         this.gift = gift;
-        this.assignee = assignee;
         this.nodeID = nodeID;
         this.status = "Unresolved";
         this.date = new Date(Calendar.getInstance().getTime().getTime());
@@ -36,6 +36,10 @@ public class GiftRequest {
         this.date = date;
         this.time = time;
 
+    }
+
+    public void assignDeliverer(String name){
+        this.assignee = name;
     }
 
     public String getGrID() {

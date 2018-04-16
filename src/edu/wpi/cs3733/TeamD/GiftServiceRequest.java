@@ -12,6 +12,9 @@ public class GiftServiceRequest {
 
     private static GiftRequestManager GRM;
 
+    private static int windowWidth;
+    private static int windowLength;
+
 
     public GiftServiceRequest(){
         Database.getInstance().initDatabase();
@@ -23,6 +26,9 @@ public class GiftServiceRequest {
     }
 
     public void run(int xcoord, int ycoord, int windowWidth, int windowLength, String cssPath, String destNodeID, String originNodeID) throws ServiceException{
+
+        this.windowWidth = windowWidth;
+        this.windowLength = windowLength;
 
         GRM.getGiftDirectory().addGift("Snake", (float)19.99, false);
         GRM.getGiftDirectory().addGift("Plane", (float)10.00, false);
@@ -54,5 +60,13 @@ public class GiftServiceRequest {
             throw new ServiceException("Couldnt load main screen.");
         }
 
+    }
+
+    public static int getWindowWidth(){
+        return windowWidth;
+    }
+
+    public static int getWindowLength(){
+        return windowLength;
     }
 }
