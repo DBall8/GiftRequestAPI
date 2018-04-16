@@ -27,9 +27,6 @@ import java.util.ResourceBundle;
 public class GiftServiceRequestController extends ScreenController implements Initializable, Observer{
 
     @FXML
-    private JFXTreeTableView unassignedGifts;
-
-    @FXML
     private JFXButton orderGiftButton;
     @FXML
     private JFXButton adminOptionsButton;
@@ -100,7 +97,7 @@ public class GiftServiceRequestController extends ScreenController implements In
 
     @Override
     public void update() {
-        List<String> employeeNames = new ArrayList<String>();
+        List<String> employeeNames = new ArrayList<>();
         for(Employee e: GiftServiceRequest.getGRM().getEmployeeList().getEmployees()){
             employeeNames.add(e.getName());
         }

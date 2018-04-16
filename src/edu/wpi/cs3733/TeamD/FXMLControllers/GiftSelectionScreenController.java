@@ -24,6 +24,8 @@ import javafx.util.Callback;
 
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -78,7 +80,10 @@ public class GiftSelectionScreenController extends ScreenController implements I
             }
         });
 
-
+        List<String> locations = GiftServiceRequest.getLocations();
+        if(locations.size() > 0){
+            //TextFields.bindAutoCompletion(locationTextField, locations);
+        }
     }
 
     @FXML

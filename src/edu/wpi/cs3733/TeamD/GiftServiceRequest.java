@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GiftServiceRequest {
 
@@ -15,6 +17,8 @@ public class GiftServiceRequest {
 
     private static int windowWidth;
     private static int windowLength;
+
+    private static List<String> locations = new ArrayList<>();
 
 
     public GiftServiceRequest(){
@@ -40,7 +44,6 @@ public class GiftServiceRequest {
 
         //GRM.addGRWDATE(GRM.getGiftDirectory().getGifts().get(0), "Here", new Date(System.currentTimeMillis()));
 
-
         try{
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GiftRequestScreen.fxml"));
@@ -63,6 +66,14 @@ public class GiftServiceRequest {
             throw new ServiceException("Couldnt load main screen.");
         }
 
+    }
+
+    public void importLocations(List<String> locations){
+        GiftServiceRequest.locations = locations;
+    }
+
+    public static List<String> getLocations(){
+        return locations;
     }
 
     public static int getWindowWidth(){

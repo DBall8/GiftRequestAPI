@@ -1,0 +1,30 @@
+.jfx-button:armed,
+.jfx-button{
+    -fx-font-family: "Palatino Linotype";
+    -fx-font-size: 18;
+    -fx-text-alignment: center;
+    -fx-text-fill: #FFFCEB;
+    -fx-background-color:
+            #a6b5c9,
+            linear-gradient(#303842 0%, #3e5577 20%, #375074 100%),
+            linear-gradient(#768aa5 0%, #849cbb 5%, #486a9a 51%, #012E57 100%);
+    -fx-background-radius: 10;
+}
+.jfx-button:focused{
+    -fx-font-family: "Palatino Linotype";
+    -fx-font-size: 18;
+    -fx-text-alignment: center;
+    -fx-text-fill: #FFFCEB;
+    -fx-opacity: 0.7;
+}
+.jfx-button:hover{
+    -fx-font-family: "Palatino Linotype";
+    -fx-font-size: 19;
+    -fx-text-alignment: center;
+    -fx-text-fill: #FFFCEB;
+    /*-fx-background-color: 040464;*/
+    -fx-border-width: 5px;
+    -fx-border-color: #040464;
+    -fx-border-insets: -3 -3 -3 -3;
+    -fx-border-radius: 10;
+}
