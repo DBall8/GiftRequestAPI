@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.TeamD;
 
+import edu.wpi.cs3733.TeamD.Entities.Employee;
 import edu.wpi.cs3733.TeamD.Entities.GiftRequest;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
 import edu.wpi.cs3733.TeamD.Managers.GiftDirectory;
@@ -69,8 +70,9 @@ public class Database {
         // Gift table
         try{
             Statement s = connection.createStatement();
-            s.execute("CREATE TABLE gifts (name VARCHAR(200) PRIMARY KEY, cost FLOAT, isFood VARCHAR(5))");
+            s.execute("CREATE TABLE gifts (giftID VARCHAR(100) PRIMARY KEY, name VARCHAR(200), cost FLOAT, isFood VARCHAR(5))");
             s.close();
+            System.out.println("Created gifts table.");
         } catch(SQLException e){
             System.out.println("Could not create gifts table.");
             //e.printStackTrace();
@@ -79,8 +81,9 @@ public class Database {
         // Employee table
         try{
             Statement s = connection.createStatement();
-            s.execute("CREATE TABLE employees (name VARCHAR(100) PRIMARY KEY)");
+            s.execute("CREATE TABLE employees (employeeID VARCHAR(100) PRIMARY KEY, name VARCHAR(100))");
             s.close();
+            System.out.println("Created employees table.");
         } catch(SQLException e){
             System.out.println("Could not create employees table.");
             //e.printStackTrace();
@@ -90,18 +93,19 @@ public class Database {
         try{
             Statement s = connection.createStatement();
             s.execute("CREATE TABLE giftrequests (grID VARCHAR(50) PRIMARY KEY," +
-                    " giftName VARCHAR(200)," +
+                    " giftID VARCHAR(100)," +
                     " assignee VARCHAR(100)," +
                     " nodeID VARCHAR(255)," +
                     " status VARCHAR(50)," +
                     " date DATE," +
                     " time TIME," +
-                    "constraint fk_giftName foreign key(giftName) references gifts(name))--," +
+                    "constraint fk_giftID foreign key(giftID) references gifts(giftID))--," +
                     "constraint fk_assignee foreign key(assignee) references employees(name))");
             s.close();
+            System.out.println("Created gift requests table.");
         } catch(SQLException e){
             System.out.println("Could not create gift requests table.");
-            //e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -147,18 +151,19 @@ public class Database {
 
     }
 
-    public static boolean insertEmployee(String employee){
+    public static boolean insertEmployee(Employee e){
         try{
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO employees VALUES(?)");
-            ps.setString(1, employee);
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO employees VALUES(?, ?)");
+            ps.setString(1, e.getEmployeeID());
+            ps.setString(2, e.getName());
             ps.execute();
             ps.close();
-        } catch(SQLIntegrityConstraintViolationException e){
-            System.out.println("Could not insert employee " + employee + " because the employee already exists.");
+        } catch(SQLIntegrityConstraintViolationException err){
+            System.out.println("Could not insert employee " + e.getName() + " because the employee already exists.");
             return false;
-        } catch(SQLException e){
-            System.out.println("Could not insert employee " + employee);
-            e.printStackTrace();
+        } catch(SQLException err){
+            System.out.println("Could not insert employee " + e.getName());
+            err.printStackTrace();
             return false;
         }
         return true;
@@ -166,10 +171,11 @@ public class Database {
 
     public static boolean insertGift(Gift g){
         try{
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO gifts VALUES(?, ?, ?)");
-            ps.setString(1, g.getName());
-            ps.setFloat(2, g.getCost());
-            ps.setString(3, g.isFood()? "t": "f");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO gifts VALUES(?, ?, ?, ?)");
+            ps.setString(1, g.getGiftID());
+            ps.setString(2, g.getName());
+            ps.setFloat(3, g.getCost());
+            ps.setString(4, g.isFood()? "t": "f");
             ps.execute();
             ps.close();
         } catch(SQLIntegrityConstraintViolationException e){
@@ -187,7 +193,7 @@ public class Database {
         try{
             PreparedStatement ps = connection.prepareStatement("INSERT INTO giftrequests VALUES(?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, gr.getGrID());
-            ps.setString(2, gr.getGift().getName());
+            ps.setString(2, gr.getGift().getGiftID());
             ps.setString(3, gr.getAssignee());
             ps.setString(4, gr.getNodeID());
             ps.setString(5, gr.getStatus());
@@ -206,6 +212,19 @@ public class Database {
         return true;
     }
 
+    public static void removeGift(String giftID){
+        try{
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM gifts WHERE giftID=?");
+            ps.setString(1, giftID);
+            ps.execute();
+            ps.close();
+        } catch (SQLException e){
+            System.out.println("Could not remove gift " + giftID);
+            e.printStackTrace();
+        }
+    }
+
+
     public static HashMap<String, Gift> loadGiftDirectory(){
         HashMap<String, Gift> gifts = new HashMap<>();
 
@@ -213,17 +232,18 @@ public class Database {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM gifts");
             ResultSet rs = ps.executeQuery();
 
-            String name;
+            String giftID, name;
             Float cost;
             boolean isFood;
 
             while(rs.next()){
+                giftID = rs.getString("giftID");
                 name = rs.getString("name");
                 cost = rs.getFloat("cost");
                 isFood = rs.getString("isFood").equals("t");
 
-                Gift g = new Gift(name, cost, isFood);
-                gifts.put(name, g);
+                Gift g = new Gift(giftID, name, cost, isFood);
+                gifts.put(giftID, g);
             }
 
             ps.close();
@@ -236,17 +256,18 @@ public class Database {
         return gifts;
     }
 
-    public static List<String> loadEmployees(){
-        List<String> employees = new ArrayList<String>();
+    public static List<Employee> loadEmployees(){
+        List<Employee> employees = new ArrayList<Employee>();
         try{
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM employees");
             ResultSet rs = ps.executeQuery();
 
-            String name;
+            String employeeID, name;
 
             while(rs.next()){
+                employeeID = rs.getString("employeeID");
                 name = rs.getString("name");
-                employees.add(name);
+                employees.add(new Employee(employeeID, name));
             }
 
             ps.close();
@@ -265,20 +286,20 @@ public class Database {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM giftrequests");
             ResultSet rs = ps.executeQuery();
 
-            String grID, giftName, assignee, nodeID, status;
+            String grID, giftID, assignee, nodeID, status;
             Date date;
             Time time;
 
             while(rs.next()){
                 grID = rs.getString("grID");
-                giftName = rs.getString("giftName");
+                giftID = rs.getString("giftID");
                 assignee = rs.getString("assignee");
                 nodeID = rs.getString("nodeID");
                 status = rs.getString("status");
                 date = rs.getDate("date");
                 time = rs.getTime("time");
 
-                GiftRequest gr = new GiftRequest(grID, giftDirectory.getGift(giftName), assignee, nodeID, status, date, time);
+                GiftRequest gr = new GiftRequest(grID, giftDirectory.getGift(giftID), assignee, nodeID, status, date, time);
                 grs.put(grID, gr);
             }
 

@@ -2,14 +2,20 @@ package edu.wpi.cs3733.TeamD.Entities;
 
 public class Gift {
 
+    private String giftID;
     private String name;
     private float cost;
     private boolean isFood;
 
-    public Gift(String name, float cost, boolean isFood) {
+    public Gift(String giftID, String name, float cost, boolean isFood) {
+        this.giftID = giftID;
         this.name = name;
         this.cost = cost;
         this.isFood = isFood;
+    }
+
+    public String getGiftID() {
+        return giftID;
     }
 
     public String getName() {

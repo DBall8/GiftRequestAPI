@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.wpi.cs3733.TeamD.Entities.Employee;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
 import edu.wpi.cs3733.TeamD.GiftServiceRequest;
 import edu.wpi.cs3733.TeamD.Managers.GiftRequestManager;
@@ -53,8 +54,25 @@ public class AdminScreenController extends ScreenController implements Initializ
         giftTable = new GiftTable(giftTreeTable);
         giftTable.load(GiftServiceRequest.getGRM().getGiftDirectory().getGifts());
 
-        JFXTreeTableColumn<EmployeeRow, String> nameCol = new JFXTreeTableColumn<>("Employee");
-        nameCol.setPrefWidth(600);
+        JFXTreeTableColumn<EmployeeRow, String> idCol = new JFXTreeTableColumn<>("Employee ID");
+        idCol.setPrefWidth(300);
+        idCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<EmployeeRow, String>, ObservableValue<String>>() {
+
+            /**
+             * call
+             * Used to populate the columns in the TreeTableView.  Would be the same for all of the following as well.
+             *
+             * @param param: Sets up a Column with a field
+             * @return the TreeTableView
+             */
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<EmployeeRow, String> param) {
+                return param.getValue().getValue().employeeID;
+            }
+        });
+
+        JFXTreeTableColumn<EmployeeRow, String> nameCol = new JFXTreeTableColumn<>("Name");
+        nameCol.setPrefWidth(300);
         nameCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<EmployeeRow, String>, ObservableValue<String>>() {
 
             /**
@@ -74,7 +92,7 @@ public class AdminScreenController extends ScreenController implements Initializ
 
         GiftRequestManager GRM = GiftServiceRequest.getGRM();
 
-        for (String e : GRM.getEmployeeList().getEmployees()) {
+        for (Employee e : GRM.getEmployeeList().getEmployees()) {
             employees.add(new EmployeeRow(e));
         }
 
@@ -117,7 +135,9 @@ public class AdminScreenController extends ScreenController implements Initializ
 
         }
         else if(e.getSource() == deleteGiftButton){
-
+            TreeItem<GiftRow> selectedItem = giftTreeTable.getSelectionModel().getSelectedItem();
+            Gift g = selectedItem.getValue().getGift();
+            GiftServiceRequest.getGRM().getGiftDirectory().deleteGift(g.getGiftID());
         }
     }
 

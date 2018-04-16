@@ -1,4 +1,5 @@
 import edu.wpi.cs3733.TeamD.Database;
+import edu.wpi.cs3733.TeamD.Entities.Employee;
 import edu.wpi.cs3733.TeamD.Entities.GiftRequest;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
 import edu.wpi.cs3733.TeamD.Managers.EmployeeList;
@@ -20,8 +21,8 @@ public class DBTests {
     @Test
     public void dbtests(){
 
-        String employee = "Fred";
-        Gift g = new Gift("Snake", (float)19.99, false);
+        Employee employee = new Employee("e1", "Fred");
+        Gift g = new Gift("G2","Snake", (float)19.99, false);
         GiftRequest gr = new GiftRequest(g, "node1");
 
         Database.getInstance().insertEmployee(employee);
@@ -32,23 +33,19 @@ public class DBTests {
         GiftDirectory gd = grm.getGiftDirectory();
         EmployeeList el = grm.getEmployeeList();
 
-        assertEquals("Snake", gd.getGift("Snake").getName());
-        assertEquals((float)19.99, gd.getGift("Snake").getCost());
+        assertEquals("Snake", gd.getGift("G2").getName());
+        assertEquals((float)19.99, gd.getGift("G2").getCost());
 
-        assertEquals("Fred", el.getEmployee(0));
 
-        gd.addGift("Toy plane", (float)5.00, true);
-        el.addEmployee("Nate");
-
-        Database.getInstance().close();
-        Database.getInstance().initDatabase();
+        Gift plane = gd.addGift("Toy plane", (float)5.00, true);
+        Employee nate = el.addEmployee("N1", "Nate");
 
         grm = new GiftRequestManager();
         gd = grm.getGiftDirectory();
         el = grm.getEmployeeList();
 
-        assertEquals("Toy plane", gd.getGift("Toy plane").getName());
-        assertEquals((float)5.00, gd.getGift("Toy plane").getCost());
+        assertEquals("Toy plane", gd.getGift(plane.getGiftID()).getName());
+        assertEquals((float)5.00, gd.getGift(plane.getGiftID()).getCost());
 
         assertEquals(true, el.containsEmployee("Nate"));
 
