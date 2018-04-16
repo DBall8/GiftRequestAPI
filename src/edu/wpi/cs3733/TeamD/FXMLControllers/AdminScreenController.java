@@ -47,6 +47,16 @@ public class AdminScreenController extends ScreenController implements Initializ
     @FXML
     private TextField giftCostField;
 
+    @FXML
+    private JFXButton addPersonnelButton;
+    @FXML
+    private JFXButton deletePersonnelButton;
+    @FXML
+    private TextField personnelNameField;
+    @FXML
+    private TextField employeeIDField;
+
+
     GiftTable giftTable;
     EmployeeTable employeeTable;
     ObservableList<EmployeeRow> employees;
@@ -90,6 +100,26 @@ public class AdminScreenController extends ScreenController implements Initializ
             TreeItem<GiftRow> selectedItem = giftTreeTable.getSelectionModel().getSelectedItem();
             Gift g = selectedItem.getValue().getGift();
             GiftServiceRequest.getGRM().getGiftDirectory().deleteGift(g.getGiftID());
+        }
+        else if(e.getSource() == addPersonnelButton){
+            String employeeID = employeeIDField.getText();
+            String employeeName = personnelNameField.getText();
+
+            if(employeeID.equals("") || employeeName.equals("")){
+                System.out.println("Please provide an ID and a name for the employee.");
+                return;
+            }
+
+            GiftRequestManager GRM = GiftServiceRequest.getGRM();
+            GRM.getEmployeeList().addEmployee(employeeID, employeeName);
+
+            employeeIDField.setText("");
+            personnelNameField.setText("");
+        }
+        else if(e.getSource() == deletePersonnelButton){
+            TreeItem<EmployeeRow> selectedItem = personnelTreeTable.getSelectionModel().getSelectedItem();
+            Employee employee = selectedItem.getValue().getEmployee();
+            GiftServiceRequest.getGRM().getEmployeeList().deleteEmployee(employee.getEmployeeID());
         }
     }
 

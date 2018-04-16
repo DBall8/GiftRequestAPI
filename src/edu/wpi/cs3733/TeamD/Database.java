@@ -226,6 +226,20 @@ public class Database {
         return false;
     }
 
+    public static boolean removeEmployee(String employeeID){
+        try{
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM employees WHERE employeeID=?");
+            ps.setString(1, employeeID);
+            ps.execute();
+            ps.close();
+            return true;
+        } catch (SQLException e){
+            System.out.println("Could not remove employee " + employeeID);
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     public static HashMap<String, Gift> loadGiftDirectory(){
         HashMap<String, Gift> gifts = new HashMap<>();
@@ -258,8 +272,8 @@ public class Database {
         return gifts;
     }
 
-    public static List<Employee> loadEmployees(){
-        List<Employee> employees = new ArrayList<Employee>();
+    public static HashMap<String, Employee> loadEmployees(){
+        HashMap<String, Employee> employees = new HashMap<>();
         try{
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM employees");
             ResultSet rs = ps.executeQuery();
@@ -269,7 +283,7 @@ public class Database {
             while(rs.next()){
                 employeeID = rs.getString("employeeID");
                 name = rs.getString("name");
-                employees.add(new Employee(employeeID, name));
+                employees.put(employeeID, new Employee(employeeID, name));
             }
 
             ps.close();

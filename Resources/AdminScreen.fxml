@@ -38,15 +38,20 @@
                               <JFXTreeTableView fx:id="personnelTreeTable" prefHeight="568.0" prefWidth="1110.0" VBox.vgrow="ALWAYS" />
                               <HBox spacing="20.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <JFXButton stylesheets="@css/bigButtons.css" text="Add Personnel">
+                                    <JFXButton fx:id="addPersonnelButton" onAction="#buttonAction" stylesheets="@css/bigButtons.css" text="Add Personnel">
                                        <font>
                                           <Font size="30.0" />
                                        </font></JFXButton>
-                                    <JFXTextField promptText="Name">
+                                    <JFXTextField fx:id="employeeIDField" promptText="Employee ID">
+                                       <HBox.margin>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </HBox.margin>
+                                    </JFXTextField>
+                                    <JFXTextField fx:id="personnelNameField" promptText="Name">
                                        <HBox.margin>
                                           <Insets bottom="20.0" right="120.0" top="20.0" />
                                        </HBox.margin></JFXTextField>
-                                    <JFXButton alignment="CENTER_RIGHT" styleClass="jfx-button" text="Delete">
+                                    <JFXButton fx:id="deletePersonnelButton" alignment="CENTER_RIGHT" onAction="#buttonAction" styleClass="jfx-button" text="Delete">
                                        <font>
                                           <Font size="30.0" />
                                        </font>

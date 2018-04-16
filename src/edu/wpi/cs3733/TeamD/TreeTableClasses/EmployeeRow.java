@@ -8,12 +8,18 @@ import javafx.beans.property.StringProperty;
 
 public class EmployeeRow extends RecursiveTreeObject<EmployeeRow>{
 
+    private Employee e;
     public StringProperty employeeID;
     public StringProperty name;
 
     public EmployeeRow(Employee e){
+        this.e = e;
         this.employeeID = new SimpleStringProperty(e.getEmployeeID());
         this.name = new SimpleStringProperty(e.getName());
+    }
+
+    public Employee getEmployee(){
+        return e;
     }
 
 }

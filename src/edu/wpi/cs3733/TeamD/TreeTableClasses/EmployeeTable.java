@@ -80,7 +80,7 @@ public class EmployeeTable implements Observer{
 
         //Sets the columns in the TreeTableView
         final TreeItem<EmployeeRow> root = new RecursiveTreeItem<>(employees, RecursiveTreeObject::getChildren);
-        treeTable.getColumns().setAll(nameCol);
+        treeTable.getColumns().setAll(idCol, nameCol);
         treeTable.setRoot(root);
         treeTable.setShowRoot(false);
     }
