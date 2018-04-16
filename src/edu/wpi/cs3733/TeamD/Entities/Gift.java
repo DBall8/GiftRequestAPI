@@ -7,8 +7,8 @@ public class Gift {
     private float cost;
     private boolean isFood;
 
-    public Gift(String name, float cost, boolean isFood) {
-        this.giftID = "GIFT-" + System.currentTimeMillis();
+    public Gift(String giftID, String name, float cost, boolean isFood) {
+        this.giftID = giftID;
         this.name = name;
         this.cost = cost;
         this.isFood = isFood;

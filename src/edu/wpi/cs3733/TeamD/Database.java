@@ -227,16 +227,17 @@ public class Database {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM gifts");
             ResultSet rs = ps.executeQuery();
 
-            String name;
+            String giftID, name;
             Float cost;
             boolean isFood;
 
             while(rs.next()){
+                giftID = rs.getString("giftID");
                 name = rs.getString("name");
                 cost = rs.getFloat("cost");
                 isFood = rs.getString("isFood").equals("t");
 
-                Gift g = new Gift(name, cost, isFood);
+                Gift g = new Gift(giftID, name, cost, isFood);
                 gifts.put(name, g);
             }
 

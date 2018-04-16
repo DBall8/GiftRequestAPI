@@ -33,7 +33,8 @@ public class GiftDirectory {
     }
 
     public Gift addGift(String name, float cost, boolean isFood){
-        Gift g = new Gift(name, cost, isFood);
+        String giftID = "GIFT-" + System.currentTimeMillis();
+        Gift g = new Gift(giftID, name, cost, isFood);
         if(Database.getInstance().insertGift(g)){
             gifts.put(name, g);
             return g;
