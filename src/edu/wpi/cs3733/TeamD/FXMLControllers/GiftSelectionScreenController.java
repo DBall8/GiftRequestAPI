@@ -48,7 +48,6 @@ public class GiftSelectionScreenController extends ScreenController implements I
         errorLabel.setVisible(false);
 
         GiftTable giftTable = new GiftTable(giftTreeTable);
-        giftTable.load(GiftServiceRequest.getGRM().getGiftDirectory().getGifts());
 
         //Used to filter searches in the TreeTableView.
         filterTextField.textProperty().addListener(new ChangeListener<String>() {

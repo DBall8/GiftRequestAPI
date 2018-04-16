@@ -67,10 +67,13 @@ public class GiftTable implements Observer{
         });
 
         GiftServiceRequest.getGRM().getGiftDirectory().subscribe(this);
+        update();
 
     }
 
-    public void load(ArrayList<Gift> giftList){
+    @Override
+    public void update() {
+        ArrayList<Gift> giftList = GiftServiceRequest.getGRM().getGiftDirectory().getGifts();
         gifts = FXCollections.observableArrayList();
 
         for (Gift g : giftList) {
@@ -82,12 +85,5 @@ public class GiftTable implements Observer{
         treeTable.getColumns().setAll(nameCol, costCol);
         treeTable.setRoot(root);
         treeTable.setShowRoot(false);
-    }
-
-    @Override
-    public void update() {
-        GiftRequestManager GRM = GiftServiceRequest.getGRM();
-        ArrayList<Gift> giftList = GRM.getGiftDirectory().getGifts();
-        load(giftList);
     }
 }
