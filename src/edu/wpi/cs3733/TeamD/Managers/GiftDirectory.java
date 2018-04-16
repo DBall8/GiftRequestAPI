@@ -16,8 +16,8 @@ public class GiftDirectory {
         gifts = Database.getInstance().loadGiftDirectory();
     }
 
-    public Gift getGift(String name){
-        return gifts.get(name);
+    public Gift getGift(String giftID){
+        return gifts.get(giftID);
     }
 
     public ArrayList<Gift> getGifts(){
@@ -36,7 +36,7 @@ public class GiftDirectory {
         String giftID = "GIFT-" + System.currentTimeMillis();
         Gift g = new Gift(giftID, name, cost, isFood);
         if(Database.getInstance().insertGift(g)){
-            gifts.put(name, g);
+            gifts.put(giftID, g);
             return g;
         }
 

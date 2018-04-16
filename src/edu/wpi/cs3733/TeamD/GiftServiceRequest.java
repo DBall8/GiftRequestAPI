@@ -33,9 +33,9 @@ public class GiftServiceRequest {
         GRM.getGiftDirectory().addGift("Snake", (float)19.99, false);
         GRM.getGiftDirectory().addGift("Plane", (float)10.00, false);
         GRM.getGiftDirectory().addGift("Chocolates", (float)1.00, true);
-        GRM.getEmployeeList().addEmployee("Trevor");
-        GRM.getEmployeeList().addEmployee("Damon");
-        GRM.getEmployeeList().addEmployee("Jess");
+        GRM.getEmployeeList().addEmployee("T1", "Trevor");
+        GRM.getEmployeeList().addEmployee("D1","Damon");
+        GRM.getEmployeeList().addEmployee("J1","Jess");
 
 
         try{
