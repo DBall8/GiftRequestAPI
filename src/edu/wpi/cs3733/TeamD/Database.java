@@ -105,7 +105,7 @@ public class Database {
             System.out.println("Created gift requests table.");
         } catch(SQLException e){
             System.out.println("Could not create gift requests table.");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -212,16 +212,18 @@ public class Database {
         return true;
     }
 
-    public static void removeGift(String giftID){
+    public static boolean removeGift(String giftID){
         try{
             PreparedStatement ps = connection.prepareStatement("DELETE FROM gifts WHERE giftID=?");
             ps.setString(1, giftID);
             ps.execute();
             ps.close();
+            return true;
         } catch (SQLException e){
             System.out.println("Could not remove gift " + giftID);
             e.printStackTrace();
         }
+        return false;
     }
 
 

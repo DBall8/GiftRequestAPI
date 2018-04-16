@@ -6,7 +6,9 @@ import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
 import edu.wpi.cs3733.TeamD.GiftServiceRequest;
+import edu.wpi.cs3733.TeamD.Managers.GiftDirectory;
 import edu.wpi.cs3733.TeamD.Managers.GiftRequestManager;
+import edu.wpi.cs3733.TeamD.ObserverPattern.Observer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,7 +20,7 @@ import javafx.util.Callback;
 import java.util.ArrayList;
 
 
-public class GiftTable{
+public class GiftTable implements Observer{
 
     JFXTreeTableView<GiftRow> treeTable;
     JFXTreeTableColumn<GiftRow, String> nameCol;
@@ -63,12 +65,13 @@ public class GiftTable{
                 return param.getValue().getValue().cost;
             }
         });
+
+        GiftServiceRequest.getGRM().getGiftDirectory().subscribe(this);
+
     }
 
     public void load(ArrayList<Gift> giftList){
         gifts = FXCollections.observableArrayList();
-
-        GiftRequestManager GRM = GiftServiceRequest.getGRM();
 
         for (Gift g : giftList) {
             gifts.add(new GiftRow(g));
@@ -81,9 +84,10 @@ public class GiftTable{
         treeTable.setShowRoot(false);
     }
 
-    public void addRow(Gift g){
-        gifts.add(new GiftRow(g));
-        treeTable.refresh();
+    @Override
+    public void update() {
+        GiftRequestManager GRM = GiftServiceRequest.getGRM();
+        ArrayList<Gift> giftList = GRM.getGiftDirectory().getGifts();
+        load(giftList);
     }
-
 }

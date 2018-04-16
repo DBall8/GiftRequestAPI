@@ -2,13 +2,15 @@ package edu.wpi.cs3733.TeamD.Managers;
 
 import edu.wpi.cs3733.TeamD.Database;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
+import edu.wpi.cs3733.TeamD.ObserverPattern.ObservableSubject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class GiftDirectory {
+
+public class GiftDirectory extends ObservableSubject {
 
     private HashMap<String, Gift> gifts;
 
@@ -37,14 +39,19 @@ public class GiftDirectory {
         Gift g = new Gift(giftID, name, cost, isFood);
         if(Database.getInstance().insertGift(g)){
             gifts.put(giftID, g);
+
+            notifyObservers();
             return g;
         }
-
-        return g;
+        return null;
     }
 
     public void deleteGift(String giftID){
-        Database.removeGift(giftID);
+        if(Database.removeGift(giftID)){
+            gifts.remove(giftID);
+            notifyObservers();
+        }
+
     }
 
 }

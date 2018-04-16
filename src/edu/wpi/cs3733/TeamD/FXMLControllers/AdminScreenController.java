@@ -126,10 +126,6 @@ public class AdminScreenController extends ScreenController implements Initializ
             GiftRequestManager GRM = GiftServiceRequest.getGRM();
             Gift g = GRM.getGiftDirectory().addGift(giftName, cost, false);
 
-            if(g != null) {
-                giftTable.addRow(g);
-            }
-
             giftNameField.setText("");
             giftCostField.setText("");
 

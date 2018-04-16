@@ -30,12 +30,12 @@ public class GiftServiceRequest {
         this.windowWidth = windowWidth;
         this.windowLength = windowLength;
 
-        GRM.getGiftDirectory().addGift("Snake", (float)19.99, false);
-        GRM.getGiftDirectory().addGift("Plane", (float)10.00, false);
-        GRM.getGiftDirectory().addGift("Chocolates", (float)1.00, true);
-        GRM.getEmployeeList().addEmployee("T1", "Trevor");
-        GRM.getEmployeeList().addEmployee("D1","Damon");
-        GRM.getEmployeeList().addEmployee("J1","Jess");
+        //GRM.getGiftDirectory().addGift("Snake", (float)19.99, false);
+        //GRM.getGiftDirectory().addGift("Plane", (float)10.00, false);
+        //GRM.getGiftDirectory().addGift("Chocolates", (float)1.00, true);
+        //GRM.getEmployeeList().addEmployee("T1", "Trevor");
+        //GRM.getEmployeeList().addEmployee("D1","Damon");
+        //GRM.getEmployeeList().addEmployee("J1","Jess");
 
 
         try{
