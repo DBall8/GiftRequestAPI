@@ -15,8 +15,6 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.util.Callback;
 
-import java.util.List;
-
 public class EmployeeTable implements Observer{
 
     private JFXTreeTableView<EmployeeRow> treeTable;

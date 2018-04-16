@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import edu.wpi.cs3733.TeamD.Entities.Employee;
 import edu.wpi.cs3733.TeamD.Entities.GiftRequest;
 import edu.wpi.cs3733.TeamD.GiftServiceRequest;
 import edu.wpi.cs3733.TeamD.Managers.GiftRequestManager;
@@ -18,7 +17,7 @@ import javafx.util.Callback;
 
 import java.util.List;
 
-public class GRTable implements Observer{
+public class GRTable implements Observer {
 
     private boolean assigned;
 

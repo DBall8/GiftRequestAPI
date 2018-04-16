@@ -3,14 +3,11 @@ package edu.wpi.cs3733.TeamD.FXMLControllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableView;
 import edu.wpi.cs3733.TeamD.Entities.Employee;
-import edu.wpi.cs3733.TeamD.Entities.GiftRequest;
 import edu.wpi.cs3733.TeamD.GiftServiceRequest;
 import edu.wpi.cs3733.TeamD.ObserverPattern.Observer;
-import edu.wpi.cs3733.TeamD.TreeTableClasses.EmployeeRow;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.GRRow;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.GRTable;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class GiftServiceRequestController extends ScreenController implements Initializable, Observer{
+public class GiftServiceRequestController extends ScreenController implements Initializable, Observer {
 
     @FXML
     private JFXButton orderGiftButton;

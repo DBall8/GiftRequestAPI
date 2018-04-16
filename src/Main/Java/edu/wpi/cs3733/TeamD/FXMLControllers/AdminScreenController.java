@@ -1,10 +1,7 @@
 package edu.wpi.cs3733.TeamD.FXMLControllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.cs3733.TeamD.Entities.Employee;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
 import edu.wpi.cs3733.TeamD.GiftServiceRequest;
@@ -16,8 +13,6 @@ import edu.wpi.cs3733.TeamD.TreeTableClasses.EmployeeRow;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.EmployeeTable;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.GiftRow;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.GiftTable;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,9 +21,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ResourceBundle;

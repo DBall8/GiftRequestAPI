@@ -2,10 +2,8 @@ package edu.wpi.cs3733.TeamD.Managers;
 
 import edu.wpi.cs3733.TeamD.Database;
 import edu.wpi.cs3733.TeamD.Entities.Employee;
-import edu.wpi.cs3733.TeamD.Entities.Gift;
 import edu.wpi.cs3733.TeamD.ObserverPattern.ObservableSubject;
 
-import javax.xml.crypto.Data;
 import java.util.*;
 
 public class EmployeeList extends ObservableSubject{

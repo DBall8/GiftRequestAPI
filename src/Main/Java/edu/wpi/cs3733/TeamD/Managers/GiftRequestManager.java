@@ -9,7 +9,7 @@ import java.util.*;
 import java.sql.Date;
 
 
-public class GiftRequestManager extends ObservableSubject{
+public class GiftRequestManager extends ObservableSubject {
 
     private HashMap<String, GiftRequest> giftRequests;
     private GiftDirectory giftDirectory;

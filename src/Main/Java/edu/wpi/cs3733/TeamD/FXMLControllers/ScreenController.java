@@ -1,13 +1,10 @@
 package edu.wpi.cs3733.TeamD.FXMLControllers;
 
 import edu.wpi.cs3733.TeamD.GiftServiceRequest;
-import edu.wpi.cs3733.TeamD.Managers.GiftRequestManager;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
