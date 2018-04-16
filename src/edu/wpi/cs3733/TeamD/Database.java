@@ -57,7 +57,7 @@ public class Database {
         }
 
         // UNCOMMENT THE BELOW LINE TO RESET THE DATABASE
-        //dropTables();
+        dropTables();
         createTables();
 
         // Connection successful!
@@ -69,7 +69,7 @@ public class Database {
         // Gift table
         try{
             Statement s = connection.createStatement();
-            s.execute("CREATE TABLE gifts (name VARCHAR(200) PRIMARY KEY, cost FLOAT, isFood VARCHAR(5))");
+            s.execute("CREATE TABLE gifts (giftID VARCHAR(100) PRIMARY KEY, name VARCHAR(200) PRIMARY KEY, cost FLOAT, isFood VARCHAR(5))");
             s.close();
         } catch(SQLException e){
             System.out.println("Could not create gifts table.");
@@ -79,7 +79,7 @@ public class Database {
         // Employee table
         try{
             Statement s = connection.createStatement();
-            s.execute("CREATE TABLE employees (name VARCHAR(100) PRIMARY KEY)");
+            s.execute("CREATE TABLE employees (employeeID VARCHAR(100) PRIMARY KEY, name VARCHAR(100))");
             s.close();
         } catch(SQLException e){
             System.out.println("Could not create employees table.");
@@ -96,7 +96,7 @@ public class Database {
                     " status VARCHAR(50)," +
                     " date DATE," +
                     " time TIME," +
-                    "constraint fk_giftName foreign key(giftName) references gifts(name))--," +
+                    "constraint fk_giftID foreign key(giftName) references gifts(giftName))--," +
                     "constraint fk_assignee foreign key(assignee) references employees(name))");
             s.close();
         } catch(SQLException e){
@@ -205,6 +205,19 @@ public class Database {
         }
         return true;
     }
+
+    public static void removeGift(String giftName){
+        try{
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM gifts WHERE name=?");
+            ps.setString(1, giftName);
+            ps.execute();
+            ps.close();
+        } catch (SQLException e){
+            System.out.println("Could not remove gift " + giftName);
+            e.printStackTrace();
+        }
+    }
+
 
     public static HashMap<String, Gift> loadGiftDirectory(){
         HashMap<String, Gift> gifts = new HashMap<>();
