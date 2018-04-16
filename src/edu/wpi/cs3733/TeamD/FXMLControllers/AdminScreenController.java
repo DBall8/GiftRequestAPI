@@ -119,6 +119,7 @@ public class AdminScreenController extends ScreenController implements Initializ
         else if(e.getSource() == deleteGiftButton){
             TreeItem<GiftRow> selectedItem = giftTreeTable.getSelectionModel().getSelectedItem();
             Gift g = selectedItem.getValue().getGift();
+            GiftServiceRequest.getGRM().getGiftDirectory().deleteGift(g.getGiftID());
         }
     }
 

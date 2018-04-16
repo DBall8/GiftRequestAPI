@@ -149,7 +149,7 @@ public class Database {
 
     public static boolean insertEmployee(String employee){
         try{
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO employees VALUES(?)");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO employees VALUES(?, ?)");
             ps.setString(1, employee);
             ps.execute();
             ps.close();
@@ -166,10 +166,11 @@ public class Database {
 
     public static boolean insertGift(Gift g){
         try{
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO gifts VALUES(?, ?, ?)");
-            ps.setString(1, g.getName());
-            ps.setFloat(2, g.getCost());
-            ps.setString(3, g.isFood()? "t": "f");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO gifts VALUES(?, ?, ?, ?)");
+            ps.setString(1, g.getGiftID());
+            ps.setString(2, g.getName());
+            ps.setFloat(3, g.getCost());
+            ps.setString(4, g.isFood()? "t": "f");
             ps.execute();
             ps.close();
         } catch(SQLIntegrityConstraintViolationException e){
@@ -206,14 +207,14 @@ public class Database {
         return true;
     }
 
-    public static void removeGift(String giftName){
+    public static void removeGift(String giftID){
         try{
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM gifts WHERE name=?");
-            ps.setString(1, giftName);
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM gifts WHERE giftID=?");
+            ps.setString(1, giftID);
             ps.execute();
             ps.close();
         } catch (SQLException e){
-            System.out.println("Could not remove gift " + giftName);
+            System.out.println("Could not remove gift " + giftID);
             e.printStackTrace();
         }
     }

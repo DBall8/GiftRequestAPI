@@ -42,8 +42,8 @@ public class GiftDirectory {
         return g;
     }
 
-    public void deleteGift(String giftName){
-        Database.removeGift(giftName);
+    public void deleteGift(String giftID){
+        Database.removeGift(giftID);
     }
 
 }
