@@ -315,7 +315,7 @@ public class Database {
                 date = rs.getDate("date");
                 time = rs.getTime("time");
 
-                GiftRequest gr = new GiftRequest(grID, giftDirectory.getGift(giftID), assignee, nodeID, status, date, time);
+                GiftRequest gr = new GiftRequest(grID, giftDirectory.getGift(giftID), assignee, status, nodeID, date, time);
                 grs.put(grID, gr);
             }
 
@@ -328,5 +328,37 @@ public class Database {
 
         return grs;
     }
+
+    public static boolean resolveGR(String grID){
+        try{
+            PreparedStatement ps = connection.prepareStatement("UPDATE giftrequests SET status=? WHERE grID=?");
+            ps.setString(1, "Resolved");
+            ps.setString(2, grID);
+            ps.execute();
+            ps.close();
+            return true;
+        } catch(SQLException e){
+            System.out.println("Could not resolve Gift Request " + grID);
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean assignGR(String grID, String assignee){
+        try{
+            PreparedStatement ps = connection.prepareStatement("UPDATE giftrequests SET assignee=? WHERE grID=?");
+            ps.setString(1, assignee);
+            ps.setString(2, grID);
+            ps.execute();
+            ps.close();
+            return true;
+        } catch(SQLException e){
+            System.out.println("Could not resolve Gift Request " + grID);
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
 
 }

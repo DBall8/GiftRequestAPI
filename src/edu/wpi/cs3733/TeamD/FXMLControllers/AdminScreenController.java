@@ -10,6 +10,8 @@ import edu.wpi.cs3733.TeamD.Entities.Gift;
 import edu.wpi.cs3733.TeamD.GiftServiceRequest;
 import edu.wpi.cs3733.TeamD.Managers.GiftRequestManager;
 import edu.wpi.cs3733.TeamD.ObserverPattern.Observer;
+import edu.wpi.cs3733.TeamD.Reports.GiftFrequencyReport;
+import edu.wpi.cs3733.TeamD.Reports.GiftsOverTimeReport;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.EmployeeRow;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.EmployeeTable;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.GiftRow;
@@ -20,6 +22,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -56,6 +60,11 @@ public class AdminScreenController extends ScreenController implements Initializ
     @FXML
     private TextField employeeIDField;
 
+    @FXML
+    private BarChart giftFrequencyChart;
+    @FXML
+    private LineChart delivariesOverTimeChart;
+
 
     GiftTable giftTable;
     EmployeeTable employeeTable;
@@ -67,6 +76,12 @@ public class AdminScreenController extends ScreenController implements Initializ
         giftTable = new GiftTable(giftTreeTable);
 
         employeeTable = new EmployeeTable(personnelTreeTable);
+
+        GiftFrequencyReport gfr = new GiftFrequencyReport(giftFrequencyChart);
+        gfr.generateReport();
+
+        GiftsOverTimeReport gotr = new GiftsOverTimeReport(delivariesOverTimeChart);
+        gotr.generateReport();
     }
 
     @FXML

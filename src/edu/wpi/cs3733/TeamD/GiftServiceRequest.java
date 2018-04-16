@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Date;
 
 public class GiftServiceRequest {
 
@@ -36,6 +37,8 @@ public class GiftServiceRequest {
         //GRM.getEmployeeList().addEmployee("T1", "Trevor");
         //GRM.getEmployeeList().addEmployee("D1","Damon");
         //GRM.getEmployeeList().addEmployee("J1","Jess");
+
+        //GRM.addGRWDATE(GRM.getGiftDirectory().getGifts().get(0), "Here", new Date(System.currentTimeMillis()));
 
 
         try{

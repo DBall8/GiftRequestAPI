@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.TeamD.Entities;
 
+import edu.wpi.cs3733.TeamD.Database;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
@@ -22,9 +24,8 @@ public class GiftRequest {
         this.status = "Unresolved";
         this.date = new Date(Calendar.getInstance().getTime().getTime());
         this.time = new Time(Calendar.getInstance().getTime().getTime());
+
     }
-
-
 
     // For loading existing Gift Requests because this loads an existing timestamp
     public GiftRequest(String grID, Gift gift, String assignee, String status, String nodeID, Date date, Time time) {
@@ -39,7 +40,16 @@ public class GiftRequest {
     }
 
     public void assignDeliverer(String name){
-        this.assignee = name;
+
+        if(Database.getInstance().assignGR(grID, name)){
+            this.assignee = name;
+        }
+    }
+
+    public void resolve(){
+        if(Database.getInstance().resolveGR(grID)){
+            this.status = "Resolved";
+        }
     }
 
     public String getGrID() {
@@ -68,5 +78,10 @@ public class GiftRequest {
 
     public Time getTime() {
         return time;
+    }
+
+    // FOR TESTING REPORTS ONLY
+    public void setDate(Date d){
+        this.date = d;
     }
 }
