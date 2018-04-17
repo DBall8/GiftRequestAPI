@@ -21,15 +21,18 @@ public class GiftServiceRequest {
     private static int windowWidth;
     private static int windowLength;
 
-    private static boolean adminEnabled = true;
-    private static String destNode = "";
+    private static boolean adminEnabled;
+    private static String destNode;
 
-    private static List<String> locations = new ArrayList<>();
+    private static List<String> locations;
 
 
     public GiftServiceRequest(){
         Database.getInstance().initDatabase();
         GRM = new GiftRequestManager();
+        destNode = "";
+        adminEnabled = true;
+        locations = new ArrayList<>();
     }
 
     public static GiftRequestManager getGRM(){
