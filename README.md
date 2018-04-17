@@ -1,7 +1,7 @@
 # Team D Gift Request 
 ## Welcome to the Dapper Demogorgon's Gift Request API, for requesting a gift from the gift shop to any location in the hospital!
 ### Steps to include this API into your project:
-1) Add the JAR file as a library in your project
+1) Add the JAR file as a library in your project [Team-D-Gift-Request.jar](https://github.com/DBall8/GiftRequestAPI/raw/master/Team-D-Gift-Request.jar)
 2) Add a function that is linked to a button in your UI
 3) In that function, enter the following code:
 ```java
@@ -36,16 +36,16 @@ compile fileTree(dir: 'libs', include: '*.jar')
 
 ### OPTIONAL [but highly useful] EXTRA COMMANDS 
 **Disable admin options**:
-- to disable admin options (could be used to disable admin options when non-admins are logged in), insert the following code before giftServiceRequest.run()
-    giftServiceRequest.disableAdmin();
+- to disable admin options (could be used to disable admin options when non-admins are logged in), insert the following code before ```java giftServiceRequest.run()
+    giftServiceRequest.disableAdmin();```
 **Load a list of available locations**:
 - to load a list of locations to select as the delivery destination, insert the following code before giftServiceRequest.run()
-    giftServiceRequest.importLocations(List<String> locations);
+   ```java giftServiceRequest.importLocations(List<String> locations);```
 - where locations is a list of Strings representing the names of potential locations. This will give autocomplete suggestions in the text field
     for selecting a delivery destination.
 **Reset the Gift Request database**:
 - if for some reason during developement you want to whipe the database, just run
-    giftServiceRequest.resetDatabase();
+   ```java giftServiceRequest.resetDatabase();```
 
 ### FULL EXAMPLE:
 ```java
