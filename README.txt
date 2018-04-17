@@ -18,6 +18,13 @@ try{
 }
 
 And that's it, the API should just load the next time the function is called by the button!
+
+ALTERNATIVE GRADLE INSTALLATION -------------------------------------------------------------
+
+1) In your build.gradle file, add the line "compile fileTree(dir: 'libs', include: '*.jar')" (without surrounding double quotes) after the line "dependencies {"
+2) Create a folder called "libs" at the top of your project file tree
+3) Place Team-D-Gift-Request.jar in your libs folder, and now gradle should take care of installing everything in the libs folder!
+
 ----------------------------------------------------------------------------------------------
 
 About the run function:
@@ -52,20 +59,23 @@ OPTIONAL [but highly useful] EXTRA COMMANDS ====================================
 
 	giftServiceRequest.resetDatabase();
 
-===============================================================================================
+==============================================================================================
+
 
 FULL EXAMPLE:
 
 GiftServiceRequest giftServiceRequest = new GiftServiceRequest();
-giftServiceRequest.disableAdmin();
-
+giftServiceRequest.disableAdmin(); // disables admin options
+List<String> locations = new ArrayList<>();
+locations.add("Endoscopy");
+locations.add("Garden Cafe");
+giftServiceRequest.importLocations(locations); // loads autocomplete locations
 try{
     giftServiceRequest.run(0, 0, 1900, 1000, null, null, null);
 }catch (Exception e){
     System.out.println("Failed to run API");
     e.printStackTrace();
 }
-
 
 ==============================================================================================
 

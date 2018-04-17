@@ -2,6 +2,7 @@ package edu.wpi.cs3733.TeamD.FXMLControllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableView;
+import edu.wpi.cs3733.TeamD.Database;
 import edu.wpi.cs3733.TeamD.Entities.Employee;
 import edu.wpi.cs3733.TeamD.GiftServiceRequest;
 import edu.wpi.cs3733.TeamD.ObserverPattern.Observer;
@@ -23,6 +24,8 @@ import java.util.ResourceBundle;
 
 public class GiftServiceRequestController extends ScreenController implements Initializable, Observer {
 
+    @FXML
+    private JFXButton closeButton;
     @FXML
     private JFXButton orderGiftButton;
     @FXML
@@ -61,9 +64,14 @@ public class GiftServiceRequestController extends ScreenController implements In
         update();
     }
 
+
     @FXML
     private void buttonAction(ActionEvent e){
-        if(e.getSource() == orderGiftButton){
+        if(e.getSource() == closeButton){
+            Database.getInstance().close();
+            ((Stage)(closeButton.getScene().getWindow())).close();
+        }
+        else if(e.getSource() == orderGiftButton){
             try{
                 popupScreen("GiftSelectorScreen.fxml", (Stage)orderGiftButton.getScene().getWindow(), "Place an Order");
             } catch(IOException ioe){

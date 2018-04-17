@@ -19,7 +19,7 @@
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
    <top>
-      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" BorderPane.alignment="CENTER">
          <children>
             <JFXButton fx:id="orderGiftButton" onAction="#buttonAction" prefHeight="86.0" prefWidth="268.0" style="-fx-background-color: GRAY;" styleClass="jfx-button" stylesheets="@css/default.css" text="Order Gift">
                <font>
@@ -30,6 +30,14 @@
                </HBox.margin>
             </JFXButton>
             <JFXButton fx:id="adminOptionsButton" disable="true" onAction="#buttonAction" prefHeight="86.0" prefWidth="342.0" style="-fx-background-color: GRAY;" styleClass="jfx-button" stylesheets="@css/default.css" text="Admin Options" visible="false">
+               <font>
+                  <Font size="40.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXButton fx:id="closeButton" onAction="#buttonAction" prefHeight="86.0" prefWidth="268.0" style="-fx-background-color: LIGHTGRAY;" styleClass="jfx-button" stylesheets="@css/default.css" text="Close">
                <font>
                   <Font size="40.0" />
                </font>

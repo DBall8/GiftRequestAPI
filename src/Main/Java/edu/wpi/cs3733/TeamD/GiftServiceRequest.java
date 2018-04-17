@@ -14,6 +14,8 @@ import java.util.List;
 
 public class GiftServiceRequest {
 
+    private Stage stage;
+
     private static GiftRequestManager GRM;
 
     private static int windowWidth;
@@ -47,7 +49,7 @@ public class GiftServiceRequest {
         }
 
         try{
-            Stage stage = new Stage();
+            stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GiftRequestScreen.fxml"));
 
             Scene scene = new Scene(root, windowWidth, windowLength);
