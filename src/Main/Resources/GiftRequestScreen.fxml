@@ -28,7 +28,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton fx:id="adminOptionsButton" onAction="#buttonAction" prefHeight="86.0" prefWidth="342.0" style="-fx-background-color: GRAY;" text="Admin Options">
+            <JFXButton fx:id="adminOptionsButton" disable="true" onAction="#buttonAction" prefHeight="86.0" prefWidth="342.0" style="-fx-background-color: GRAY;" text="Admin Options" visible="false">
                <font>
                   <Font size="40.0" />
                </font>

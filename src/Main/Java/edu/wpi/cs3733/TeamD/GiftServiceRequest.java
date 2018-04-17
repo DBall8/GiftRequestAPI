@@ -7,7 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class GiftServiceRequest {
@@ -16,6 +18,8 @@ public class GiftServiceRequest {
 
     private static int windowWidth;
     private static int windowLength;
+
+    private static boolean adminEnabled = true;
 
     private static List<String> locations = new ArrayList<>();
 
@@ -29,19 +33,37 @@ public class GiftServiceRequest {
         return GRM;
     }
 
+    public static void disableAdmin(){
+        GiftServiceRequest.adminEnabled = false;
+    }
+
     public void run(int xcoord, int ycoord, int windowWidth, int windowLength, String cssPath, String destNodeID, String originNodeID) throws ServiceException{
 
         this.windowWidth = windowWidth;
         this.windowLength = windowLength;
 
-        //GRM.getGiftDirectory().addGift("Snake", (float)19.99, false);
-        //GRM.getGiftDirectory().addGift("Plane", (float)10.00, false);
-        //GRM.getGiftDirectory().addGift("Chocolates", (float)1.00, true);
-        //GRM.getEmployeeList().addEmployee("T1", "Trevor");
-        //GRM.getEmployeeList().addEmployee("D1","Damon");
-        //GRM.getEmployeeList().addEmployee("J1","Jess");
+        /*
+        GRM.getGiftDirectory().addGift("Snake", (float)19.99, false);
+        GRM.getGiftDirectory().addGift("Plane", (float)10.00, false);
+        GRM.getGiftDirectory().addGift("Chocolates", (float)1.00, true);
+        GRM.getEmployeeList().addEmployee("T1", "Trevor");
+        GRM.getEmployeeList().addEmployee("D1","Damon");
+        GRM.getEmployeeList().addEmployee("J1","Jess");
 
-        //GRM.addGRWDATE(GRM.getGiftDirectory().getGifts().get(0), "Here", new Date(System.currentTimeMillis()));
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, -1);
+        GRM.addGRWDATE(GRM.getGiftDirectory().getGifts().get(1), "Here", new Date(c.getTime().getTime()));
+        c = Calendar.getInstance();
+        c.add(Calendar.DATE, -2);
+        GRM.addGRWDATE(GRM.getGiftDirectory().getGifts().get(2), "Here", new Date(c.getTime().getTime()));
+        c = Calendar.getInstance();
+        c.add(Calendar.DATE, -3);
+        GRM.addGRWDATE(GRM.getGiftDirectory().getGifts().get(1), "Here", new Date(c.getTime().getTime()));
+        c = Calendar.getInstance();
+        c.add(Calendar.DATE, -4);
+        GRM.addGRWDATE(GRM.getGiftDirectory().getGifts().get(0), "Here", new Date(c.getTime().getTime()));
+        */
+
 
         try{
             Stage stage = new Stage();
@@ -73,6 +95,10 @@ public class GiftServiceRequest {
 
     public static List<String> getLocations(){
         return locations;
+    }
+
+    public static boolean getAdmin(){
+        return adminEnabled;
     }
 
     public static int getWindowWidth(){

@@ -49,7 +49,7 @@ public class DBTests {
 
         assertEquals(true, el.containsEmployee("Nate"));
 
-
+        grm.getGiftRequestsFromDate(3);
 
     }
 

@@ -6,7 +6,10 @@ import edu.wpi.cs3733.TeamD.Entities.Gift;
 import edu.wpi.cs3733.TeamD.Managers.GiftDirectory;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 public class Database {
 
@@ -370,6 +373,50 @@ public class Database {
         }
 
         return false;
+    }
+
+    public static List<GiftRequest> getGRDateRange(GiftDirectory gd, int days){
+
+        List<GiftRequest> requests = new ArrayList<>();
+
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, -1*days);
+        Date startDate = new Date(c.getTime().getTime());
+        Date now = new Date(Calendar.getInstance().getTime().getTime());
+
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM giftrequests WHERE date BETWEEN ? AND ?");
+            ps.setDate(1, startDate);
+            ps.setDate(2, now);
+
+            ResultSet rs = ps.executeQuery();
+
+            String grID, giftID, assignee, nodeID, status;
+            Date date;
+            Time time;
+
+            while(rs.next()){
+                grID = rs.getString("grID");
+                giftID = rs.getString("giftID");
+                assignee = rs.getString("assignee");
+                nodeID = rs.getString("nodeID");
+                status = rs.getString("status");
+                date = rs.getDate("date");
+                time = rs.getTime("time");
+
+                GiftRequest gr = new GiftRequest(grID, gd.getGift(giftID), assignee, status, nodeID, date, time);
+                requests.add(gr);
+            }
+
+            ps.close();
+            rs.close();
+
+        } catch (SQLException e){
+            System.out.println("Could not retrieve gift requests.");
+            e.printStackTrace();
+        }
+
+        return requests;
     }
 
 

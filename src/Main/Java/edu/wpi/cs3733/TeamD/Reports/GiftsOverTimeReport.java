@@ -20,8 +20,11 @@ public class GiftsOverTimeReport {
         this.chart = chart;
     }
 
-    public void generateReport(){
-        List<GiftRequest> grs = GiftServiceRequest.getGRM().getAllGiftRequests();
+    public void generateReport(int daysBack){
+
+        chart.getData().clear();
+
+        List<GiftRequest> grs = GiftServiceRequest.getGRM().getGiftRequestsFromDate(daysBack);
 
         days = new HashMap<>();
         for(GiftRequest gr: grs){

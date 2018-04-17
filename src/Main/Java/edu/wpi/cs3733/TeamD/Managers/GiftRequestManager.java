@@ -96,6 +96,10 @@ public class GiftRequestManager extends ObservableSubject {
         return grList;
     }
 
+    public List<GiftRequest> getGiftRequestsFromDate(int days){
+        return Database.getInstance().getGRDateRange(giftDirectory, days);
+    }
+
 
     public void addGRWDATE(Gift g, String nodeID, Date date){
         GiftRequest gr = new GiftRequest(g, nodeID);

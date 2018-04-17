@@ -46,6 +46,12 @@ public class GiftServiceRequestController extends ScreenController implements In
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        if(GiftServiceRequest.getAdmin()){
+            adminOptionsButton.setVisible(true);
+            adminOptionsButton.setDisable(false);
+        }
+
         new GRTable(unassignedTreeTable, false);
         new GRTable(pendingTreeTable, true);
 

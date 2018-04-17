@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.TeamD.FXMLControllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
 import edu.wpi.cs3733.TeamD.Entities.Employee;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
@@ -9,6 +10,7 @@ import edu.wpi.cs3733.TeamD.Managers.GiftRequestManager;
 import edu.wpi.cs3733.TeamD.ObserverPattern.Observer;
 import edu.wpi.cs3733.TeamD.Reports.GiftFrequencyReport;
 import edu.wpi.cs3733.TeamD.Reports.GiftsOverTimeReport;
+import edu.wpi.cs3733.TeamD.Reports.PieChartReport;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.EmployeeRow;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.EmployeeTable;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.GiftRow;
@@ -19,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
@@ -26,7 +29,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AdminScreenController extends ScreenController implements Initializable, Observer{
+public class AdminScreenController extends ScreenController implements Initializable{
 
     @FXML
     private JFXButton backButton;
@@ -54,9 +57,14 @@ public class AdminScreenController extends ScreenController implements Initializ
     private TextField employeeIDField;
 
     @FXML
+    private JFXTextField dayTextField;
+
+    @FXML
     private BarChart giftFrequencyChart;
     @FXML
     private LineChart delivariesOverTimeChart;
+    @FXML
+    private PieChart pieChart;
 
 
     GiftTable giftTable;
@@ -71,10 +79,29 @@ public class AdminScreenController extends ScreenController implements Initializ
         employeeTable = new EmployeeTable(personnelTreeTable);
 
         GiftFrequencyReport gfr = new GiftFrequencyReport(giftFrequencyChart);
-        gfr.generateReport();
+        gfr.generateReport(7);
 
         GiftsOverTimeReport gotr = new GiftsOverTimeReport(delivariesOverTimeChart);
-        gotr.generateReport();
+        gotr.generateReport(7);
+
+        PieChartReport pcr = new PieChartReport(pieChart);
+        pcr.generateReport(7);
+
+        dayTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(oldValue.equals("")){
+                dayTextField.setText("0");
+                return;
+            }
+            try{
+                int days = Integer.parseInt(newValue);
+                gfr.generateReport(days);
+                gotr.generateReport(days);
+                pcr.generateReport(days);
+                dayTextField.setText(Integer.toString(days));
+            } catch(NumberFormatException e){
+               dayTextField.setText(oldValue);
+            }
+        });
     }
 
     @FXML
@@ -131,6 +158,11 @@ public class AdminScreenController extends ScreenController implements Initializ
         }
     }
 
+    @FXML
+    private void dayFieldChanged(ActionEvent e){
+        System.out.println(((JFXTextField)e.getSource()).getText());
+    }
+
     private float moneyStringToFloat(String money){
         money = money.replace("$", "");
         try{
@@ -143,8 +175,4 @@ public class AdminScreenController extends ScreenController implements Initializ
         }
     }
 
-    @Override
-    public void update() {
-
-    }
 }
