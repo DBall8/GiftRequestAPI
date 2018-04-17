@@ -47,7 +47,9 @@ public class GiftServiceRequestController extends ScreenController implements In
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        adminOptionsButton.setManaged(false);
         if(GiftServiceRequest.getAdmin()){
+            adminOptionsButton.setManaged(true);
             adminOptionsButton.setVisible(true);
             adminOptionsButton.setDisable(false);
         }

@@ -7,6 +7,7 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -29,7 +30,7 @@
                               <Insets right="40.0" />
                            </HBox.margin></Label>
                         <JFXTextField fx:id="filterTextField" prefWidth="169.0" promptText="Filter" styleClass="jfx-text-field" stylesheets="@css/default.css" />
-                        <JFXCheckBox fx:id="foodCheckBox" styleClass="jfx-check-box" stylesheets="@css/default.css" text="Include food" />
+                        <JFXCheckBox fx:id="foodCheckBox" onAction="#checkBoxAction" selected="true" styleClass="jfx-check-box" stylesheets="@css/default.css" text="Include food" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -38,7 +39,10 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </HBox>
-                  <JFXTreeTableView fx:id="giftTreeTable" prefHeight="505.0" prefWidth="779.0" stylesheets="@css/default.css" VBox.vgrow="ALWAYS" />
+                  <JFXTreeTableView fx:id="giftTreeTable" prefHeight="505.0" prefWidth="779.0" style="-fx-font-size: 20px;" stylesheets="@css/default.css" VBox.vgrow="ALWAYS">
+                     <columnResizePolicy>
+                        <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy></JFXTreeTableView>
                   <HBox alignment="CENTER_LEFT" prefHeight="166.0" prefWidth="678.0" spacing="20.0">
                      <children>
                         <JFXButton fx:id="orderGiftButton" onAction="#buttonAction" styleClass="jfx-button" text="Order Gift">
@@ -53,7 +57,10 @@
                            <font>
                               <Font size="30.0" />
                            </font></Label>
-                        <JFXTextField fx:id="locationTextField" styleClass="jfx-text-field" stylesheets="@css/default.css" />
+                        <JFXTextField fx:id="locationTextField" styleClass="jfx-text-field" stylesheets="@css/default.css">
+                           <font>
+                              <Font size="20.0" />
+                           </font></JFXTextField>
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

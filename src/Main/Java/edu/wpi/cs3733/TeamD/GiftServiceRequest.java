@@ -20,6 +20,7 @@ public class GiftServiceRequest {
     private static int windowLength;
 
     private static boolean adminEnabled = true;
+    private static String destNode = "";
 
     private static List<String> locations = new ArrayList<>();
 
@@ -41,6 +42,7 @@ public class GiftServiceRequest {
 
         this.windowWidth = windowWidth;
         this.windowLength = windowLength;
+        destNode = destNodeID;
 
         /*
         GRM.getGiftDirectory().addGift("Snake", (float)19.99, false);
@@ -99,6 +101,10 @@ public class GiftServiceRequest {
 
     public static boolean getAdmin(){
         return adminEnabled;
+    }
+
+    public static String getDestNode(){
+        return destNode;
     }
 
     public static int getWindowWidth(){

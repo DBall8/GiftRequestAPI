@@ -1,8 +1,6 @@
 package edu.wpi.cs3733.TeamD.FXMLControllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.*;
 import edu.wpi.cs3733.TeamD.Entities.Employee;
 import edu.wpi.cs3733.TeamD.Entities.Gift;
 import edu.wpi.cs3733.TeamD.GiftServiceRequest;
@@ -15,6 +13,8 @@ import edu.wpi.cs3733.TeamD.TreeTableClasses.EmployeeRow;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.EmployeeTable;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.GiftRow;
 import edu.wpi.cs3733.TeamD.TreeTableClasses.GiftTable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +22,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
@@ -58,6 +60,11 @@ public class AdminScreenController extends ScreenController implements Initializ
 
     @FXML
     private JFXTextField dayTextField;
+    @FXML
+    private JFXCheckBox isFoodCheckBox;
+
+    @FXML
+    private Label warningLabel;
 
     @FXML
     private BarChart giftFrequencyChart;
@@ -65,6 +72,9 @@ public class AdminScreenController extends ScreenController implements Initializ
     private LineChart delivariesOverTimeChart;
     @FXML
     private PieChart pieChart;
+
+    @FXML
+    private JFXTabPane tabbedPane;
 
 
     GiftTable giftTable;
@@ -102,6 +112,15 @@ public class AdminScreenController extends ScreenController implements Initializ
                dayTextField.setText(oldValue);
             }
         });
+
+        tabbedPane.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<Tab>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
+                        warningLabel.setVisible(false);
+                    }
+                }
+        );
     }
 
     @FXML
@@ -114,24 +133,32 @@ public class AdminScreenController extends ScreenController implements Initializ
             String giftCost = giftCostField.getText();
 
             if(giftName.equals("") || giftCost.equals("")){
-                System.out.println("Please provide a name and a cost for the gift.");
+                warningLabel.setText("Please provide a name and a cost for the gift.");
+                warningLabel.setVisible(true);
                 return;
             }
 
             float cost;
             if((cost = moneyStringToFloat(giftCost)) < 0){
-                System.out.println("Invalid money amount.");
+                warningLabel.setText("Invalid money amount.");
+                warningLabel.setVisible(true);
                 return;
             }
 
             GiftRequestManager GRM = GiftServiceRequest.getGRM();
-            Gift g = GRM.getGiftDirectory().addGift(giftName, cost, false);
+            Gift g = GRM.getGiftDirectory().addGift(giftName, cost, isFoodCheckBox.isSelected());
 
             giftNameField.setText("");
             giftCostField.setText("");
+            warningLabel.setVisible(false);
 
         }
         else if(e.getSource() == deleteGiftButton){
+            if(giftTreeTable.getSelectionModel().isEmpty()){
+                warningLabel.setText("Please select a gift to delete.");
+                warningLabel.setVisible(true);
+                return;
+            }
             TreeItem<GiftRow> selectedItem = giftTreeTable.getSelectionModel().getSelectedItem();
             Gift g = selectedItem.getValue().getGift();
             GiftServiceRequest.getGRM().getGiftDirectory().deleteGift(g.getGiftID());
@@ -141,7 +168,8 @@ public class AdminScreenController extends ScreenController implements Initializ
             String employeeName = personnelNameField.getText();
 
             if(employeeID.equals("") || employeeName.equals("")){
-                System.out.println("Please provide an ID and a name for the employee.");
+                warningLabel.setText("Please provide an ID and a name for the employee.");
+                warningLabel.setVisible(true);
                 return;
             }
 
@@ -150,17 +178,18 @@ public class AdminScreenController extends ScreenController implements Initializ
 
             employeeIDField.setText("");
             personnelNameField.setText("");
+            warningLabel.setVisible(false);
         }
         else if(e.getSource() == deletePersonnelButton){
+            if(personnelTreeTable.getSelectionModel().isEmpty()){
+                warningLabel.setText("Please select an employee to delete.");
+                warningLabel.setVisible(true);
+                return;
+            }
             TreeItem<EmployeeRow> selectedItem = personnelTreeTable.getSelectionModel().getSelectedItem();
             Employee employee = selectedItem.getValue().getEmployee();
             GiftServiceRequest.getGRM().getEmployeeList().deleteEmployee(employee.getEmployeeID());
         }
-    }
-
-    @FXML
-    private void dayFieldChanged(ActionEvent e){
-        System.out.println(((JFXTextField)e.getSource()).getText());
     }
 
     private float moneyStringToFloat(String money){

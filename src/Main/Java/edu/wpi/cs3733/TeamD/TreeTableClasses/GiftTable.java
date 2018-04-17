@@ -25,6 +25,8 @@ public class GiftTable implements Observer{
 
     ObservableList<GiftRow> gifts;
 
+    public boolean showFood = true;
+
     public GiftTable(JFXTreeTableView<GiftRow> treeTable) {
 
         this.treeTable = treeTable;
@@ -74,7 +76,9 @@ public class GiftTable implements Observer{
         gifts = FXCollections.observableArrayList();
 
         for (Gift g : giftList) {
-            gifts.add(new GiftRow(g));
+            if(!g.isFood() || showFood){
+                gifts.add(new GiftRow(g));
+            }
         }
 
         //Sets the columns in the TreeTableView

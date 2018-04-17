@@ -21,7 +21,7 @@ public class TestOpenerController {
             locations.add("Bathroom 1");locations.add("Endoscopy");locations.add("Garden Cafe");locations.add("Elevator 12");
             gr.importLocations(locations);
             //gr.disableAdmin();
-            gr.run(0,0,1900,1000,"css/default.css",null,null);
+            gr.run(0,0,1900,1000,"css/default.css","The shed",null);
         }
         catch(ServiceException se){
             System.out.println("Could not work");

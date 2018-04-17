@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
@@ -13,6 +14,7 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -21,7 +23,7 @@
 
 <BorderPane prefHeight="697.0" prefWidth="1110.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.TeamD.FXMLControllers.AdminScreenController">
    <center>
-      <JFXTabPane stylesheets="@css/default.css" tabMinHeight="80.0" BorderPane.alignment="CENTER">
+      <JFXTabPane fx:id="tabbedPane" stylesheets="@css/default.css" tabMinHeight="80.0" BorderPane.alignment="CENTER">
          <tabs>
             <Tab closable="false" style="-fx-padding: 10;" text="Delivery Personnel">
               <content>
@@ -37,25 +39,37 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                                  <font>
-                                    <Font size="30.0" />
+                                    <Font name="System Bold" size="30.0" />
                                  </font>
                               </Label>
-                              <JFXTreeTableView fx:id="personnelTreeTable" editable="true" prefHeight="568.0" prefWidth="1110.0" VBox.vgrow="ALWAYS" />
-                              <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+                              <JFXTreeTableView fx:id="personnelTreeTable" editable="true" prefHeight="568.0" prefWidth="1110.0" style="-fx-font-size: 25px;" VBox.vgrow="ALWAYS">
+                                 <columnResizePolicy>
+                                    <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy></JFXTreeTableView>
+                              <HBox VBox.vgrow="ALWAYS">
                                  <children>
                                     <JFXButton fx:id="addPersonnelButton" onAction="#buttonAction" stylesheets="@css/bigButtons.css" text="Add Personnel">
                                        <font>
                                           <Font size="30.0" />
-                                       </font></JFXButton>
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin></JFXButton>
                                     <JFXTextField fx:id="employeeIDField" promptText="Employee ID">
                                        <HBox.margin>
                                           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                        </HBox.margin>
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
                                     </JFXTextField>
                                     <JFXTextField fx:id="personnelNameField" promptText="Name">
                                        <HBox.margin>
                                           <Insets bottom="20.0" right="120.0" top="20.0" />
-                                       </HBox.margin></JFXTextField>
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font></JFXTextField>
                                     <JFXButton fx:id="deletePersonnelButton" alignment="CENTER_RIGHT" onAction="#buttonAction" styleClass="jfx-button" text="Delete">
                                        <font>
                                           <Font size="30.0" />
@@ -66,7 +80,7 @@
                                        </stylesheets></JFXButton>
                                  </children>
                                  <padding>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </HBox>
                            </children>
@@ -92,21 +106,41 @@
                                     <Font size="40.0" />
                                  </font>
                               </Label>
-                              <JFXTreeTableView fx:id="giftTreeTable" editable="true" prefHeight="431.0" prefWidth="1070.0" VBox.vgrow="ALWAYS" />
-                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                              <JFXTreeTableView fx:id="giftTreeTable" editable="true" style="-fx-font-size: 25px;" VBox.vgrow="ALWAYS">
+                                 <columnResizePolicy>
+                                    <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy></JFXTreeTableView>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <JFXButton fx:id="addGiftButton" onAction="#buttonAction" stylesheets="@css/bigButtons.css" text="Add Gift">
                                        <font>
                                           <Font size="30.0" />
-                                       </font></JFXButton>
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin></JFXButton>
                                     <JFXTextField fx:id="giftNameField" promptText="Name">
                                        <HBox.margin>
                                           <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
-                                       </HBox.margin></JFXTextField>
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font></JFXTextField>
                                     <JFXTextField fx:id="giftCostField" promptText="Cost">
                                        <HBox.margin>
                                           <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
-                                       </HBox.margin></JFXTextField>
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font></JFXTextField>
+                                    <JFXCheckBox fx:id="isFoodCheckBox" text="Food">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </JFXCheckBox>
                                     <JFXButton fx:id="deleteGiftButton" onAction="#buttonAction" styleClass="jfx-button" text="Delete">
                                        <font>
                                           <Font size="30.0" />
@@ -120,7 +154,7 @@
                                        </stylesheets></JFXButton>
                                  </children>
                                  <padding>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </HBox>
                            </children>
@@ -214,4 +248,14 @@
          </BorderPane.margin>
       </JFXButton>
    </top>
+   <bottom>
+      <Label fx:id="warningLabel" styleClass="error-label" stylesheets="@css/default.css" text="Label" textFill="RED" visible="false" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </Label>
+   </bottom>
 </BorderPane>

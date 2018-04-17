@@ -36,12 +36,14 @@ public class GiftSelectionScreenController extends ScreenController implements I
     @FXML
     private Label errorLabel;
 
+    GiftTable giftTable;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         errorLabel.setVisible(false);
 
-        GiftTable giftTable = new GiftTable(giftTreeTable);
+        giftTable = new GiftTable(giftTreeTable);
 
         //Used to filter searches in the TreeTableView.
         filterTextField.textProperty().addListener(new ChangeListener<String>() {
@@ -76,6 +78,10 @@ public class GiftSelectionScreenController extends ScreenController implements I
         if(locations.size() > 0){
             TextFields.bindAutoCompletion(locationTextField, locations);
         }
+
+        if(!GiftServiceRequest.getDestNode().equals("")){
+            locationTextField.setText(GiftServiceRequest.getDestNode());
+        }
     }
 
     @FXML
@@ -98,5 +104,11 @@ public class GiftSelectionScreenController extends ScreenController implements I
 
             ((Stage)locationTextField.getScene().getWindow()).close();
         }
+    }
+
+    @FXML
+    private void checkBoxAction(ActionEvent e){
+        giftTable.showFood = foodCheckBox.isSelected();
+        giftTable.update();
     }
 }
