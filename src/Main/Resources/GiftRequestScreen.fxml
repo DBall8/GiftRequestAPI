@@ -43,7 +43,7 @@
    <center>
       <VBox prefHeight="850.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Gift Orders">
+            <Label stylesheets="@css/default.css" text="Gift Orders">
                <font>
                   <Font size="48.0" />
                </font>
@@ -59,12 +59,12 @@
                 <RowConstraints maxHeight="278.0" minHeight="0.0" prefHeight="61.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Unassigned Deliveries:">
+                  <Label stylesheets="@css/default.css" text="Unassigned Deliveries:">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
                   </Label>
-                  <Label text="Pending Deliveries:" GridPane.columnIndex="1">
+                  <Label stylesheets="@css/default.css" text="Pending Deliveries:" GridPane.columnIndex="1">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
@@ -87,7 +87,7 @@
                   </JFXTreeTableView>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="61.0" prefWidth="117.0" text="Assign To:">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="61.0" prefWidth="117.0" stylesheets="@css/default.css" text="Assign To:">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -100,7 +100,7 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </HBox.margin>
                         </ChoiceBox>
-                        <JFXButton fx:id="assignButton" onAction="#buttonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" text="Assign">
+                        <JFXButton fx:id="assignButton" onAction="#buttonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" styleClass="jfx-button" stylesheets="@css/default.css" text="Assign">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -108,7 +108,7 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </HBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="deleteUnassingedButton" onAction="#buttonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" text="Delete Order">
+                        <JFXButton fx:id="deleteUnassingedButton" onAction="#buttonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" styleClass="jfx-button" stylesheets="@css/default.css" text="Delete Order">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -123,7 +123,7 @@
                   </HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
                      <children>
-                        <JFXButton fx:id="resolveButton" onAction="#buttonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" text="Resolve">
+                        <JFXButton fx:id="resolveButton" onAction="#buttonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" styleClass="jfx-button" stylesheets="@css/default.css" text="Resolve">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -131,7 +131,7 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </HBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="deletePendingButton" onAction="#buttonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" text="Delete Order">
+                        <JFXButton fx:id="deletePendingButton" onAction="#buttonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: GRAY;" styleClass="jfx-button" stylesheets="@css/default.css" text="Delete Order">
                            <font>
                               <Font size="18.0" />
                            </font>

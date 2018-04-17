@@ -24,7 +24,7 @@
                      <children>
                         <Label stylesheets="@css/default.css" text="Gifts">
                            <font>
-                              <Font size="40.0" />
+                              <Font name="System Bold" size="40.0" />
                            </font>
                            <HBox.margin>
                               <Insets right="40.0" />
