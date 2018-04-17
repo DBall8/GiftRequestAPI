@@ -1,10 +1,9 @@
 package edu.wpi.cs3733.TeamD;
 
-public class ServiceException extends Throwable {
+public class ServiceException extends Exception {
 
-    String message;
 
     public ServiceException(String message) {
-        this.message = message;
+        super(message);
     }
 }

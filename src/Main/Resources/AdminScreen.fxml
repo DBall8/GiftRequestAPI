@@ -5,7 +5,6 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -48,7 +47,7 @@
                                  </columnResizePolicy></JFXTreeTableView>
                               <HBox VBox.vgrow="ALWAYS">
                                  <children>
-                                    <JFXButton fx:id="addPersonnelButton" onAction="#buttonAction" stylesheets="@css/bigButtons.css" text="Add Personnel">
+                                    <JFXButton fx:id="addPersonnelButton" onAction="#buttonAction" style="-fx-background-color: GRAY;" stylesheets="@css/default.css" text="Add Personnel">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -70,14 +69,10 @@
                                        <font>
                                           <Font size="20.0" />
                                        </font></JFXTextField>
-                                    <JFXButton fx:id="deletePersonnelButton" alignment="CENTER_RIGHT" onAction="#buttonAction" styleClass="jfx-button" text="Delete">
+                                    <JFXButton fx:id="deletePersonnelButton" alignment="CENTER_RIGHT" onAction="#buttonAction" style="-fx-background-color: GRAY;" styleClass="jfx-button" stylesheets="@css/default.css" text="Delete">
                                        <font>
                                           <Font size="30.0" />
-                                       </font>
-                                       <stylesheets>
-                                          <URL value="@css/default.css" />
-                                          <URL value="@css/bigButtons.css" />
-                                       </stylesheets></JFXButton>
+                                       </font></JFXButton>
                                  </children>
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -112,7 +107,7 @@
                                  </columnResizePolicy></JFXTreeTableView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <JFXButton fx:id="addGiftButton" onAction="#buttonAction" stylesheets="@css/bigButtons.css" text="Add Gift">
+                                    <JFXButton fx:id="addGiftButton" onAction="#buttonAction" style="-fx-background-color: GRAY;" stylesheets="@css/default.css" text="Add Gift">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -141,17 +136,13 @@
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </HBox.margin>
                                     </JFXCheckBox>
-                                    <JFXButton fx:id="deleteGiftButton" onAction="#buttonAction" styleClass="jfx-button" text="Delete">
+                                    <JFXButton fx:id="deleteGiftButton" onAction="#buttonAction" style="-fx-background-color: GRAY;" styleClass="jfx-button" stylesheets="@css/default.css" text="Delete">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets left="80.0" />
-                                       </HBox.margin>
-                                       <stylesheets>
-                                          <URL value="@css/default.css" />
-                                          <URL value="@css/bigButtons.css" />
-                                       </stylesheets></JFXButton>
+                                       </HBox.margin></JFXButton>
                                  </children>
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -183,13 +174,16 @@
                                        <children>
                                           <Label layoutX="42.0" layoutY="26.0" text="Over the last">
                                              <font>
-                                                <Font size="20.0" />
+                                                <Font size="25.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField fx:id="dayTextField" alignment="CENTER" layoutX="169.0" layoutY="23.0" prefHeight="31.0" prefWidth="32.0" text="7" />
-                                          <Label layoutX="221.0" layoutY="26.0" text="days">
+                                          <JFXTextField fx:id="dayTextField" alignment="CENTER" layoutX="197.0" layoutY="17.0" prefHeight="31.0" prefWidth="32.0" text="7">
                                              <font>
-                                                <Font size="20.0" />
+                                                <Font size="25.0" />
+                                             </font></JFXTextField>
+                                          <Label layoutX="245.0" layoutY="26.0" text="days">
+                                             <font>
+                                                <Font size="25.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -239,7 +233,7 @@
       </JFXTabPane>
    </center>
    <top>
-      <JFXButton fx:id="backButton" onAction="#buttonAction" prefHeight="61.0" prefWidth="135.0" stylesheets="@css/bigButtons.css" text="Back" BorderPane.alignment="CENTER_LEFT">
+      <JFXButton fx:id="backButton" onAction="#buttonAction" prefHeight="61.0" prefWidth="135.0" style="-fx-background-color: GRAY;" stylesheets="@css/default.css" text="Back" BorderPane.alignment="CENTER_LEFT">
          <font>
             <Font size="35.0" />
          </font>

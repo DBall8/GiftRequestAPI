@@ -66,7 +66,7 @@ public class Database {
         System.out.println("Java DB connection established!");
     }
 
-    private static void createTables(){
+    static void createTables(){
 
         // Gift table
         try{
@@ -110,7 +110,7 @@ public class Database {
         }
     }
 
-    public static void dropTables(){
+    static void dropTables(){
         // GiftRequest table
         try{
             Statement s = connection.createStatement();

@@ -42,30 +42,9 @@ public class GiftServiceRequest {
 
         this.windowWidth = windowWidth;
         this.windowLength = windowLength;
-        destNode = destNodeID;
-
-        /*
-        GRM.getGiftDirectory().addGift("Snake", (float)19.99, false);
-        GRM.getGiftDirectory().addGift("Plane", (float)10.00, false);
-        GRM.getGiftDirectory().addGift("Chocolates", (float)1.00, true);
-        GRM.getEmployeeList().addEmployee("T1", "Trevor");
-        GRM.getEmployeeList().addEmployee("D1","Damon");
-        GRM.getEmployeeList().addEmployee("J1","Jess");
-
-        Calendar c = Calendar.getInstance();
-        c.add(Calendar.DATE, -1);
-        GRM.addGRWDATE(GRM.getGiftDirectory().getGifts().get(1), "Here", new Date(c.getTime().getTime()));
-        c = Calendar.getInstance();
-        c.add(Calendar.DATE, -2);
-        GRM.addGRWDATE(GRM.getGiftDirectory().getGifts().get(2), "Here", new Date(c.getTime().getTime()));
-        c = Calendar.getInstance();
-        c.add(Calendar.DATE, -3);
-        GRM.addGRWDATE(GRM.getGiftDirectory().getGifts().get(1), "Here", new Date(c.getTime().getTime()));
-        c = Calendar.getInstance();
-        c.add(Calendar.DATE, -4);
-        GRM.addGRWDATE(GRM.getGiftDirectory().getGifts().get(0), "Here", new Date(c.getTime().getTime()));
-        */
-
+        if(destNodeID != null){
+            destNode = destNodeID;
+        }
 
         try{
             Stage stage = new Stage();
@@ -76,11 +55,21 @@ public class GiftServiceRequest {
                 scene.getStylesheets().add(cssPath);
             }
 
+            stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+                GiftServiceRequest.windowWidth = newVal.intValue();
+            });
+
+            stage.heightProperty().addListener((obs, oldVal, newVal) -> {
+                GiftServiceRequest.windowLength = newVal.intValue();
+            });
+
             stage.setTitle("Gift Request");
             stage.setX(xcoord);
             stage.setY(ycoord);
             stage.setScene(scene);
             stage.show();
+
+
 
         }
         catch(IOException e){
@@ -114,4 +103,10 @@ public class GiftServiceRequest {
     public static int getWindowLength(){
         return windowLength;
     }
+
+    public void resetDatabase(){
+        Database.getInstance().dropTables();
+        Database.getInstance().createTables();
+    }
+
 }
