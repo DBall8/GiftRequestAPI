@@ -47,7 +47,7 @@
                                  </columnResizePolicy></JFXTreeTableView>
                               <HBox VBox.vgrow="ALWAYS">
                                  <children>
-                                    <JFXButton fx:id="addPersonnelButton" onAction="#buttonAction" style="-fx-background-color: GRAY;" stylesheets="@css/default.css" text="Add Personnel">
+                                    <JFXButton fx:id="addPersonnelButton" onAction="#buttonAction" style="-fx-background-color: #2c3e50; -fx-text-fill: #FFFCEB;" stylesheets="@css/default.css" text="Add Personnel">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -69,7 +69,7 @@
                                        <font>
                                           <Font size="20.0" />
                                        </font></JFXTextField>
-                                    <JFXButton fx:id="deletePersonnelButton" alignment="CENTER_RIGHT" onAction="#buttonAction" style="-fx-background-color: GRAY;" styleClass="jfx-button" stylesheets="@css/default.css" text="Delete">
+                                    <JFXButton fx:id="deletePersonnelButton" alignment="CENTER_RIGHT" onAction="#buttonAction" style="-fx-background-color: #2c3e50; -fx-text-fill: #FFFCEB;" styleClass="jfx-button" stylesheets="@css/default.css" text="Delete">
                                        <font>
                                           <Font size="30.0" />
                                        </font></JFXButton>
@@ -98,7 +98,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                                  <font>
-                                    <Font size="40.0" />
+                                    <Font name="System Bold" size="40.0" />
                                  </font>
                               </Label>
                               <JFXTreeTableView fx:id="giftTreeTable" editable="true" style="-fx-font-size: 25px;" VBox.vgrow="ALWAYS">
@@ -107,7 +107,7 @@
                                  </columnResizePolicy></JFXTreeTableView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <JFXButton fx:id="addGiftButton" onAction="#buttonAction" style="-fx-background-color: GRAY;" stylesheets="@css/default.css" text="Add Gift">
+                                    <JFXButton fx:id="addGiftButton" onAction="#buttonAction" style="-fx-background-color: #2c3e50; -fx-text-fill: #FFFCEB;" stylesheets="@css/default.css" text="Add Gift">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -136,7 +136,7 @@
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </HBox.margin>
                                     </JFXCheckBox>
-                                    <JFXButton fx:id="deleteGiftButton" onAction="#buttonAction" style="-fx-background-color: GRAY;" styleClass="jfx-button" stylesheets="@css/default.css" text="Delete">
+                                    <JFXButton fx:id="deleteGiftButton" onAction="#buttonAction" style="-fx-background-color: #2c3e50; -fx-text-fill: #FFFCEB;" styleClass="jfx-button" stylesheets="@css/default.css" text="Delete">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
@@ -233,7 +233,7 @@
       </JFXTabPane>
    </center>
    <top>
-      <JFXButton fx:id="backButton" onAction="#buttonAction" prefHeight="61.0" prefWidth="135.0" style="-fx-background-color: GRAY;" stylesheets="@css/default.css" text="Back" BorderPane.alignment="CENTER_LEFT">
+      <JFXButton fx:id="backButton" onAction="#buttonAction" prefHeight="61.0" prefWidth="135.0" style="-fx-background-color: #2c3e50; -fx-text-fill: #FFFCEB;" stylesheets="@css/default.css" text="Back" BorderPane.alignment="CENTER_LEFT">
          <font>
             <Font size="35.0" />
          </font>

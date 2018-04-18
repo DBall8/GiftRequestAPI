@@ -51,7 +51,7 @@ public class Database {
         // Make a connection to the database
         try {
             // substitute your database name for myDB
-            connection = DriverManager.getConnection("jdbc:derby:mydb;create=true");
+            connection = DriverManager.getConnection("jdbc:derby:GiftRequestDB;create=true");
         } catch (SQLException e) {
             System.out.println("Connection failed. Check output console.");
             e.printStackTrace();
@@ -99,9 +99,7 @@ public class Database {
                     " nodeID VARCHAR(255)," +
                     " status VARCHAR(50)," +
                     " date DATE," +
-                    " time TIME," +
-                    "constraint fk_giftID foreign key(giftID) references gifts(giftID))--," +
-                    "constraint fk_assignee foreign key(assignee) references employees(name))");
+                    " time TIME)");
             s.close();
             System.out.println("Created gift requests table.");
         } catch(SQLException e){
