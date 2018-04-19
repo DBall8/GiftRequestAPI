@@ -45,7 +45,7 @@ compile fileTree(dir: 'libs', include: '*.jar')
     for selecting a delivery destination.
 **Early initialization**:
 - to load the database before loading the actual screen, simply run
-	```giftServiceRequest.initialize();```
+	```java giftServiceRequest.initialize();```
 - that instance of the GiftServiceRequest object will now not pause to load the database when opening its screen    
 **Reset the Gift Request database**:
 - if for some reason during developement you want to whipe the database, just run
