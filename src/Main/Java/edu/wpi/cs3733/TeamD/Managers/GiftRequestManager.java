@@ -29,8 +29,8 @@ public class GiftRequestManager extends ObservableSubject {
         return employeeList;
     }
 
-    public GiftRequest addGiftRequest(Gift g, String nodeID){
-        GiftRequest gr = new GiftRequest(g, nodeID);
+    public GiftRequest addGiftRequest(Gift g, String nodeID, String recipient){
+        GiftRequest gr = new GiftRequest(g, nodeID, recipient);
         if(Database.insertGR(gr)){
             giftRequests.put(gr.getGrID(), gr);
             notifyObservers();
@@ -98,15 +98,5 @@ public class GiftRequestManager extends ObservableSubject {
 
     public List<GiftRequest> getGiftRequestsFromDate(int days){
         return Database.getInstance().getGRDateRange(giftDirectory, days);
-    }
-
-
-    public void addGRWDATE(Gift g, String nodeID, Date date){
-        GiftRequest gr = new GiftRequest(g, nodeID);
-        gr.setDate(date);
-        if(Database.insertGR(gr)){
-            giftRequests.put(gr.getGrID(), gr);
-            notifyObservers();
-        }
     }
 }

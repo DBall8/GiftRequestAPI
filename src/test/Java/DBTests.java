@@ -23,7 +23,7 @@ public class DBTests {
 
         Employee employee = new Employee("e1", "Fred");
         Gift g = new Gift("G2","Snake", (float)19.99, false);
-        GiftRequest gr = new GiftRequest(g, "node1");
+        GiftRequest gr = new GiftRequest(g, "node1", "Monique");
 
         Database.getInstance().insertEmployee(employee);
         Database.getInstance().insertGift(g);

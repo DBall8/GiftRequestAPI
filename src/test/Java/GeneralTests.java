@@ -10,7 +10,7 @@ public class GeneralTests {
     @Test
     public void creatingEntities(){
         Gift g = new Gift("G1","Plane", (float)12.99, false);
-        GiftRequest gr = new GiftRequest(g, "node1");
+        GiftRequest gr = new GiftRequest(g, "node1", "Damon");
 
         Calendar c = Calendar.getInstance();
         c.add(Calendar.DATE, 1);

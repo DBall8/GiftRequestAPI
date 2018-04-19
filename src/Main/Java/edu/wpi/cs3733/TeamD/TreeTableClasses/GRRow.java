@@ -9,6 +9,7 @@ public class GRRow extends RecursiveTreeObject<GRRow>{
 
     private GiftRequest gr;
     public StringProperty giftName;
+    public StringProperty recipient;
     public StringProperty location;
     public StringProperty date;
     public StringProperty time;
@@ -17,6 +18,7 @@ public class GRRow extends RecursiveTreeObject<GRRow>{
     public GRRow(GiftRequest gr){
         this.gr = gr;
         giftName = new SimpleStringProperty(gr.getGift().getName());
+        recipient = new SimpleStringProperty(gr.getRecipient());
         location = new SimpleStringProperty(gr.getNodeID());
         assignee = new SimpleStringProperty(gr.getAssignee());
         date = new SimpleStringProperty(gr.getDate().toString());

@@ -23,6 +23,7 @@ public class GRTable implements Observer {
 
     JFXTreeTableView<GRRow> treeTable;
     JFXTreeTableColumn<GRRow, String> giftCol;
+    JFXTreeTableColumn<GRRow, String> recipientCol;
     JFXTreeTableColumn<GRRow, String> locationCol;
     JFXTreeTableColumn<GRRow, String> assigneeCol;
     JFXTreeTableColumn<GRRow, String> timeCol;
@@ -69,6 +70,23 @@ public class GRTable implements Observer {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<GRRow, String> param) {
                 return param.getValue().getValue().location;
+            }
+        });
+
+        recipientCol = new JFXTreeTableColumn<>("Recipient's name");
+        recipientCol.setPrefWidth(tableWidth/numCols);
+        recipientCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<GRRow, String>, ObservableValue<String>>() {
+
+            /**
+             * call
+             * Used to populate the columns in the TreeTableView.  Would be the same for all of the following as well.
+             *
+             * @param param: Sets up a Column with a field
+             * @return the TreeTableView
+             */
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<GRRow, String> param) {
+                return param.getValue().getValue().recipient;
             }
         });
 
@@ -143,10 +161,10 @@ public class GRTable implements Observer {
         //Sets the columns in the TreeTableView
         final TreeItem<GRRow> root = new RecursiveTreeItem<>(giftRequests, RecursiveTreeObject::getChildren);
         if(assigned){
-            treeTable.getColumns().setAll(giftCol, locationCol, assigneeCol, timeCol, dateCol);
+            treeTable.getColumns().setAll(giftCol, recipientCol, locationCol, assigneeCol, timeCol, dateCol);
         }
         else{
-            treeTable.getColumns().setAll(giftCol, locationCol, timeCol, dateCol);
+            treeTable.getColumns().setAll(giftCol, recipientCol, locationCol, timeCol, dateCol);
         }
 
         treeTable.setRoot(root);

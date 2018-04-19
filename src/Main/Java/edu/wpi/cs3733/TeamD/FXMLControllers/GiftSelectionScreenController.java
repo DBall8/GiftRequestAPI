@@ -32,7 +32,11 @@ public class GiftSelectionScreenController extends ScreenController implements I
     @FXML
     private JFXButton orderGiftButton;
     @FXML
+    private JFXButton cancelButton;
+    @FXML
     private JFXTextField locationTextField;
+    @FXML
+    private JFXTextField recipientTextField;
     @FXML
     private Label errorLabel;
 
@@ -89,8 +93,9 @@ public class GiftSelectionScreenController extends ScreenController implements I
         if(e.getSource() == orderGiftButton){
 
             String location = locationTextField.getText();
-            if(location.equals("")){
-                System.out.println("please select a delivery location");
+            String recipient = recipientTextField.getText();
+            if(location.equals("") || recipient.equals("")){
+                System.out.println("please select a delivery location and a recipient");
                 errorLabel.setVisible(true);
                 return;
             }
@@ -100,9 +105,12 @@ public class GiftSelectionScreenController extends ScreenController implements I
 
             GiftRequestManager GRM = GiftServiceRequest.getGRM();
 
-            GRM.addGiftRequest(g, location);
+            GRM.addGiftRequest(g, location, recipient);
 
             ((Stage)locationTextField.getScene().getWindow()).close();
+        }
+        else if(e.getSource() == cancelButton){
+            ((Stage)cancelButton.getScene().getWindow()).close();
         }
     }
 

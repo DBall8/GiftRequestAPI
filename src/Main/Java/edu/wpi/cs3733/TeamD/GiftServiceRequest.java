@@ -26,14 +26,22 @@ public class GiftServiceRequest {
 
     private static List<String> locations;
 
+    private boolean isInitialized = false;
 
-    public GiftServiceRequest(){
-        Database.getInstance().initDatabase();
+    public GiftServiceRequest(){}
+
+    public void initialize(){
+        if(!isInitialized){
+            isInitialized = true;
+            Database.getInstance().initDatabase();
+        }
+
         GRM = new GiftRequestManager();
         destNode = "";
         adminEnabled = true;
         locations = new ArrayList<>();
     }
+
 
     public static GiftRequestManager getGRM(){
         return GRM;
@@ -44,6 +52,8 @@ public class GiftServiceRequest {
     }
 
     public void run(int xcoord, int ycoord, int windowWidth, int windowLength, String cssPath, String destNodeID, String originNodeID) throws ServiceException{
+
+        initialize();
 
         this.windowWidth = windowWidth;
         this.windowLength = windowLength;
@@ -113,5 +123,7 @@ public class GiftServiceRequest {
         Database.getInstance().dropTables();
         Database.getInstance().createTables();
     }
+
+
 
 }

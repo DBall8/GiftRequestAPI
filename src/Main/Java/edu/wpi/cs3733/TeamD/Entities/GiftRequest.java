@@ -9,6 +9,7 @@ import java.util.Calendar;
 public class GiftRequest {
     String grID;
     Gift gift;
+    String recipient;
     String assignee;
     String status;
     String nodeID;
@@ -16,8 +17,9 @@ public class GiftRequest {
     Time time;
 
     // For creating brand new Gift Requests, because this generates a new timestamp
-    public GiftRequest(Gift gift, String nodeID) {
+    public GiftRequest(Gift gift, String nodeID, String recipient) {
         this.grID = "GR-" + System.currentTimeMillis();
+        this.recipient = recipient;
         this.assignee = "";
         this.gift = gift;
         this.nodeID = nodeID;
@@ -28,9 +30,10 @@ public class GiftRequest {
     }
 
     // For loading existing Gift Requests because this loads an existing timestamp
-    public GiftRequest(String grID, Gift gift, String assignee, String status, String nodeID, Date date, Time time) {
+    public GiftRequest(String grID, Gift gift, String recipient, String assignee, String status, String nodeID, Date date, Time time) {
         this.grID = grID;
         this.gift = gift;
+        this.recipient = recipient;
         this.assignee = assignee;
         this.status = status;
         this.nodeID = nodeID;
@@ -59,6 +62,8 @@ public class GiftRequest {
     public Gift getGift() {
         return gift;
     }
+
+    public String getRecipient(){ return recipient; }
 
     public String getAssignee() {
         return assignee;

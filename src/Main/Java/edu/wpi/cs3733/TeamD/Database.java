@@ -95,6 +95,7 @@ public class Database {
             Statement s = connection.createStatement();
             s.execute("CREATE TABLE giftrequests (grID VARCHAR(50) PRIMARY KEY," +
                     " giftID VARCHAR(100)," +
+                    " recipient VARCHAR(100)," +
                     " assignee VARCHAR(100)," +
                     " nodeID VARCHAR(255)," +
                     " status VARCHAR(50)," +
@@ -108,7 +109,7 @@ public class Database {
         }
     }
 
-    static void dropTables(){
+    static public void dropTables(){
         // GiftRequest table
         try{
             Statement s = connection.createStatement();
@@ -190,14 +191,15 @@ public class Database {
 
     public static boolean insertGR(GiftRequest gr){
         try{
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO giftrequests VALUES(?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO giftrequests VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, gr.getGrID());
             ps.setString(2, gr.getGift().getGiftID());
-            ps.setString(3, gr.getAssignee());
-            ps.setString(4, gr.getNodeID());
-            ps.setString(5, gr.getStatus());
-            ps.setDate(6, gr.getDate());
-            ps.setTime(7, gr.getTime());
+            ps.setString(3, gr.getRecipient());
+            ps.setString(4, gr.getAssignee());
+            ps.setString(5, gr.getNodeID());
+            ps.setString(6, gr.getStatus());
+            ps.setDate(7, gr.getDate());
+            ps.setTime(8, gr.getTime());
             ps.execute();
             ps.close();
         } catch(SQLIntegrityConstraintViolationException e){
@@ -315,20 +317,21 @@ public class Database {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM giftrequests");
             ResultSet rs = ps.executeQuery();
 
-            String grID, giftID, assignee, nodeID, status;
+            String grID, giftID, recipient, assignee, nodeID, status;
             Date date;
             Time time;
 
             while(rs.next()){
                 grID = rs.getString("grID");
                 giftID = rs.getString("giftID");
+                recipient = rs.getString("recipient");
                 assignee = rs.getString("assignee");
                 nodeID = rs.getString("nodeID");
                 status = rs.getString("status");
                 date = rs.getDate("date");
                 time = rs.getTime("time");
 
-                GiftRequest gr = new GiftRequest(grID, giftDirectory.getGift(giftID), assignee, status, nodeID, date, time);
+                GiftRequest gr = new GiftRequest(grID, giftDirectory.getGift(giftID), recipient, assignee, status, nodeID, date, time);
                 grs.put(grID, gr);
             }
 
@@ -389,20 +392,21 @@ public class Database {
 
             ResultSet rs = ps.executeQuery();
 
-            String grID, giftID, assignee, nodeID, status;
+            String grID, giftID, recipient, assignee, nodeID, status;
             Date date;
             Time time;
 
             while(rs.next()){
                 grID = rs.getString("grID");
                 giftID = rs.getString("giftID");
+                recipient = rs.getString("recipient");
                 assignee = rs.getString("assignee");
                 nodeID = rs.getString("nodeID");
                 status = rs.getString("status");
                 date = rs.getDate("date");
                 time = rs.getTime("time");
 
-                GiftRequest gr = new GiftRequest(grID, gd.getGift(giftID), assignee, status, nodeID, date, time);
+                GiftRequest gr = new GiftRequest(grID, gd.getGift(giftID), recipient, assignee, status, nodeID, date, time);
                 requests.add(gr);
             }
 
