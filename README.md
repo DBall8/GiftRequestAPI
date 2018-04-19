@@ -43,6 +43,12 @@ compile fileTree(dir: 'libs', include: '*.jar')
    ```java giftServiceRequest.importLocations(List<String> locations);```
 - where locations is a list of Strings representing the names of potential locations. This will give autocomplete suggestions in the text field
     for selecting a delivery destination.
+**Early initialization**:
+- to load the database before loading the actual screen, simply run
+
+	giftServiceRequest.initialize();
+
+- that instance of the GiftServiceRequest object will now not pause to load the database when opening its screen    
 **Reset the Gift Request database**:
 - if for some reason during developement you want to whipe the database, just run
    ```java giftServiceRequest.resetDatabase();```
