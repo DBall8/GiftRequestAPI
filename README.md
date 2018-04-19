@@ -35,19 +35,26 @@ compile fileTree(dir: 'libs', include: '*.jar')
 5. the last parameter is not used
 
 ### OPTIONAL [but highly useful] EXTRA COMMANDS 
+
 **Disable admin options**:
 - to disable admin options (could be used to disable admin options when non-admins are logged in), insert the following code before java giftServiceRequest.run()
     ```giftServiceRequest.disableAdmin();```
+    
 **Load a list of available locations**:
+
 - to load a list of locations to select as the delivery destination, insert the following code before giftServiceRequest.run()
    ```java giftServiceRequest.importLocations(List<String> locations);```
 - where locations is a list of Strings representing the names of potential locations. This will give autocomplete suggestions in the text field
     for selecting a delivery destination.
+    
 **Early initialization**:
+
 - to load the database before loading the actual screen, simply run
 	```java giftServiceRequest.initialize();```
-- that instance of the GiftServiceRequest object will now not pause to load the database when opening its screen    
+- that instance of the GiftServiceRequest object will now not pause to load the database when opening its screen
+
 **Reset the Gift Request database**:
+
 - if for some reason during developement you want to whipe the database, just run
    ```java giftServiceRequest.resetDatabase();```
 
