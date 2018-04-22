@@ -99,4 +99,8 @@ public class GiftRequestManager extends ObservableSubject {
     public List<GiftRequest> getGiftRequestsFromDate(int days){
         return Database.getInstance().getGRDateRange(giftDirectory, days);
     }
+
+    public List<GiftRequest> getEmployeeGRForDateRange(String employee, int days){
+        return Database.getInstance().renameME(giftDirectory, employee, days);
+    }
 }

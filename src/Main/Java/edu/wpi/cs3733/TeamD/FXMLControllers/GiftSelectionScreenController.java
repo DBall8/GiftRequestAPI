@@ -94,8 +94,13 @@ public class GiftSelectionScreenController extends ScreenController implements I
 
             String location = locationTextField.getText();
             String recipient = recipientTextField.getText();
-            if(location.equals("") || recipient.equals("")){
-                System.out.println("please select a delivery location and a recipient");
+            if(recipient.equals("")){
+                errorLabel.setText("Please select a recipient");
+                errorLabel.setVisible(true);
+                return;
+            }
+            else if(location.equals("")){
+                errorLabel.setText("Please select a delivery location");
                 errorLabel.setVisible(true);
                 return;
             }

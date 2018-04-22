@@ -6,6 +6,8 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -26,14 +28,16 @@ public class GiftsOverTimeReport {
 
         List<GiftRequest> grs = GiftServiceRequest.getGRM().getGiftRequestsFromDate(daysBack);
 
+        DateFormat df  = new SimpleDateFormat("dd/MM/yyyy");
         days = new HashMap<>();
         for(GiftRequest gr: grs){
             Date date = gr.getDate();
-            if(!days.containsKey(date.toString())){
-                days.put(date.toString(), 1);
+            String dateStr = df.format(date);
+            if(!days.containsKey(dateStr)){
+                days.put(dateStr, 1);
             }
             else{
-                days.put(date.toString(), days.get(date.toString()) + 1);
+                days.put(dateStr, days.get(dateStr) + 1);
             }
         }
 

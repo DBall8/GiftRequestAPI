@@ -421,5 +421,50 @@ public class Database {
         return requests;
     }
 
+    public static List<GiftRequest> renameME(GiftDirectory gd, String employee, int days){
+        List<GiftRequest> requests = new ArrayList<>();
+
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, -1*days);
+        Date startDate = new Date(c.getTime().getTime());
+        Date now = new Date(Calendar.getInstance().getTime().getTime());
+
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM giftrequests WHERE assignee=? AND date BETWEEN ? AND ?");
+            ps.setString(1, employee);
+            ps.setDate(2, startDate);
+            ps.setDate(3, now);
+
+            ResultSet rs = ps.executeQuery();
+
+            String grID, giftID, recipient, assignee, nodeID, status;
+            Date date;
+            Time time;
+
+            while(rs.next()){
+                grID = rs.getString("grID");
+                giftID = rs.getString("giftID");
+                recipient = rs.getString("recipient");
+                assignee = rs.getString("assignee");
+                nodeID = rs.getString("nodeID");
+                status = rs.getString("status");
+                date = rs.getDate("date");
+                time = rs.getTime("time");
+
+                GiftRequest gr = new GiftRequest(grID, gd.getGift(giftID), recipient, assignee, status, nodeID, date, time);
+                requests.add(gr);
+            }
+
+            ps.close();
+            rs.close();
+
+        } catch (SQLException e){
+            System.out.println("Could not retrieve gift requests.");
+            e.printStackTrace();
+        }
+
+        return requests;
+    }
+
 
 }

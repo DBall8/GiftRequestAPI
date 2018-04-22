@@ -6,6 +6,7 @@ import edu.wpi.cs3733.TeamD.Entities.Gift;
 import edu.wpi.cs3733.TeamD.GiftServiceRequest;
 import edu.wpi.cs3733.TeamD.Managers.GiftRequestManager;
 import edu.wpi.cs3733.TeamD.ObserverPattern.Observer;
+import edu.wpi.cs3733.TeamD.Reports.EmployeeDeliveryReport;
 import edu.wpi.cs3733.TeamD.Reports.GiftFrequencyReport;
 import edu.wpi.cs3733.TeamD.Reports.GiftsOverTimeReport;
 import edu.wpi.cs3733.TeamD.Reports.PieChartReport;
@@ -71,6 +72,8 @@ public class AdminScreenController extends ScreenController implements Initializ
     @FXML
     private LineChart delivariesOverTimeChart;
     @FXML
+    private LineChart delivariesByEmployeesChart;
+    @FXML
     private PieChart pieChart;
 
     @FXML
@@ -97,6 +100,9 @@ public class AdminScreenController extends ScreenController implements Initializ
         PieChartReport pcr = new PieChartReport(pieChart);
         pcr.generateReport(7);
 
+        EmployeeDeliveryReport edc = new EmployeeDeliveryReport(delivariesByEmployeesChart);
+        edc.generateReport(7);
+
         dayTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             if(oldValue.equals("")){
                 dayTextField.setText("0");
@@ -107,6 +113,7 @@ public class AdminScreenController extends ScreenController implements Initializ
                 gfr.generateReport(days);
                 gotr.generateReport(days);
                 pcr.generateReport(days);
+                edc.generateReport(days);
                 dayTextField.setText(Integer.toString(days));
             } catch(NumberFormatException e){
                dayTextField.setText(oldValue);

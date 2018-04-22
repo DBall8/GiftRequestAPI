@@ -16,11 +16,14 @@
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="697.0" prefWidth="1110.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.TeamD.FXMLControllers.AdminScreenController">
+<BorderPane prefHeight="870.0" prefWidth="1054.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.TeamD.FXMLControllers.AdminScreenController">
    <center>
       <JFXTabPane fx:id="tabbedPane" stylesheets="@css/default.css" tabMinHeight="80.0" BorderPane.alignment="CENTER">
          <tabs>
@@ -180,7 +183,8 @@
                                           <JFXTextField fx:id="dayTextField" alignment="CENTER" layoutX="197.0" layoutY="17.0" prefHeight="31.0" prefWidth="32.0" text="7">
                                              <font>
                                                 <Font size="25.0" />
-                                             </font></JFXTextField>
+                                             </font>
+                                          </JFXTextField>
                                           <Label layoutX="245.0" layoutY="26.0" text="days">
                                              <font>
                                                 <Font size="25.0" />
@@ -193,10 +197,18 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
                               </HBox>
-                              <HBox prefHeight="100000.0" prefWidth="1070.0" spacing="10.0">
+                              <GridPane alignment="CENTER" gridLinesVisible="true" VBox.vgrow="ALWAYS">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
                                  <children>
-                                    <PieChart fx:id="pieChart" title="Frequency of Gifts Bought" HBox.hgrow="ALWAYS" />
-                                    <BarChart fx:id="giftFrequencyChart" animated="false" title="Frequency of Gifts Bought">
+                                    <PieChart fx:id="pieChart" title="Frequency of Gifts Bought" />
+                                    <BarChart fx:id="giftFrequencyChart" animated="false" title="Frequency of Gifts Bought" GridPane.rowIndex="1">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
@@ -204,7 +216,15 @@
                                         <NumberAxis side="LEFT" />
                                       </yAxis>
                                     </BarChart>
-                                    <LineChart fx:id="delivariesOverTimeChart" animated="false" title="Deliveries Over Time">
+                                    <LineChart fx:id="delivariesOverTimeChart" animated="false" title="Deliveries Over Time" GridPane.columnIndex="1">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                    </LineChart>
+                                    <LineChart fx:id="delivariesByEmployeesChart" title="Delivaries by Employees" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                       <xAxis>
                                         <CategoryAxis side="BOTTOM" />
                                       </xAxis>
@@ -213,10 +233,7 @@
                                       </yAxis>
                                     </LineChart>
                                  </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </HBox>
+                              </GridPane>
                            </children>
                         </VBox>
                      </children>
