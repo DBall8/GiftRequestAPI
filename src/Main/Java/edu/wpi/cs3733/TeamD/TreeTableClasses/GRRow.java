@@ -5,7 +5,12 @@ import edu.wpi.cs3733.TeamD.Entities.GiftRequest;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 public class GRRow extends RecursiveTreeObject<GRRow>{
+
+    private static DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
     private GiftRequest gr;
     public StringProperty giftName;
@@ -21,7 +26,7 @@ public class GRRow extends RecursiveTreeObject<GRRow>{
         recipient = new SimpleStringProperty(gr.getRecipient());
         location = new SimpleStringProperty(gr.getNodeID());
         assignee = new SimpleStringProperty(gr.getAssignee());
-        date = new SimpleStringProperty(gr.getDate().toString());
+        date = new SimpleStringProperty(df.format(gr.getDate()));
         time = new SimpleStringProperty(gr.getTime().toString());
     }
 

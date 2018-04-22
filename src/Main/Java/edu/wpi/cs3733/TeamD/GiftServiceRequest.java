@@ -26,11 +26,11 @@ public class GiftServiceRequest {
 
     private static List<String> locations;
 
-    private boolean isInitialized = false;
+    private static boolean isInitialized = false;
 
     public GiftServiceRequest(){}
 
-    public void initialize(){
+    public static void initialize(){
         if(!isInitialized){
             isInitialized = true;
             Database.getInstance().initDatabase();
